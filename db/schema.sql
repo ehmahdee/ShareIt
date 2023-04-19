@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS shareit_db;
+CREATE DATABASE shareit_db;
