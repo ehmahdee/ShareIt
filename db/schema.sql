@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS shareit_db;
-CREATE DATABASE shareit_db;
+DROP DATABASE IF EXISTS crowdfund_db;
+CREATE DATABASE crowdfund_db;
