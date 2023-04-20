@@ -15,7 +15,11 @@ body {
 
 main {
   margin-left: 5rem;
+  padding: 1rem;
+}
 
+body::-webkit-scrollbar {
+  width: 0.25rem
 }
 
 body::-webkit-scrollbar-track {
@@ -35,9 +39,10 @@ body::-webkit-scrollbar-track {
   width: 5rem;
   position: fixed;
   background-color: var(--purp);
+  transition: width 200ms ease;
 }
 
-.navbar-nav {
+.navbar-nav, .login-form {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -46,14 +51,42 @@ body::-webkit-scrollbar-track {
   align-items: center
 }
 
-.nav-link {
+.nav-item {
+  width: 100%
+}
+
+.nav-link, .login-form {
   display: flex;
   align-items: center;
   height: 5rem;
+  text-decoration: none;
+}
+
+.nav-link i {
+  width: 2rem;
+  min-width: 2rem;
+  margin: 0 1.5rem;
+}
+
+.link-text, .top-input-box {
+  display: none;
+  margin-left: 1rem;
 }
 
 .login-bar:hover {
   width: 30rem;
+}
+
+.login-bar:hover .top-input-box {
+  display: block;
+}
+
+.nav-bar:hover {
+  width: 15rem;
+}
+
+.nav-bar:hover .link-text {
+  display: block;
 }
 
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
