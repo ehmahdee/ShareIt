@@ -5,27 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hub</title>
-    <link rel="stylesheet" href="../public/css/style.css">
+
+    <link rel="stylesheet" href="../public/css/hub.css">
+
+    <!--bulma link-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+    <!--Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;500&display=swap" rel="stylesheet">
+
+    <!--Font Awesome Link-->
     <script
       src="https://kit.fontawesome.com/f3e5b655dc.js"
       crossorigin="anonymous"
     ></script>
+
 </head>
 <body>
     <nav class="nav-bar">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="./profile.html" class="nav-link">
                     <i class="fa-regular fa-user" style="color: #fdf4f5;"></i>
                     <span class="link-text logo-text">Profile</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="./history.html" class="nav-link">
                     <i class="fa-solid fa-clock-rotate-left" style="color: #fdf4f5;"></i>
                     <span class="link-text logo-text">History</span>
                 </a>
@@ -36,11 +44,36 @@
                     <span class="link-text logo-text">Contact</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="./index.html" class="nav-link">
+                    <i class="fa-regular fa-door-open" style="color: #fdf4f5;"></i>
+                    <span class="link-text logo-text">Logout</span>
+                </a>
+            </li>
         </ul>
     </nav>
     <!--div to hold graphic elements-->
-    <div></div>
+    
     <!--div to contain upload capabilities-->
-    <div></div>
+    <div class="upload-container is-flex is-justify-content-center">
+    <div class="cloud-container is-flex is-justify-content-center">
+        <span class="no-image">No Image</span>
+    </div>
+    <div class="progbar">
+    <progress class="progress is-small is-primary" id="p-bar" max="100">15%</progress>
+    </div>
+    <div class="button-container field is-grouped">
+        <p class="control">
+          <button class="button is-primary is-hovered">
+            Create a new post
+          </button>
+        </p>
+        <p class="control">
+          <button class="button is-danger is-hovered">
+            Cancel
+          </button>
+        </p>
+      </div>
+    </div>
 </body>
 </html>

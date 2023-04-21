@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+    <title>History</title>
 
-    <link rel="stylesheet" href="../public/css/profile.css">
-
+    <link rel="stylesheet" href="../public/css/history.css">
+    
     <!--bulma link-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 
@@ -15,13 +15,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;500&display=swap" rel="stylesheet">
-
     <!--Font Awesome Link-->
     <script
       src="https://kit.fontawesome.com/f3e5b655dc.js"
       crossorigin="anonymous"
     ></script>
-
 </head>
 <body>
     <nav class="nav-bar">
@@ -33,9 +31,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="./history.html" class="nav-link">
-                    <i class="fa-solid fa-clock-rotate-left" style="color: #fdf4f5;"></i>
-                    <span class="link-text logo-text">History</span>
+                <a href="./profile.html" class="nav-link">
+                    <i class="fa-regular fa-user" style="color: #fdf4f5;"></i>
+                    <span class="link-text logo-text">Profile</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -52,52 +50,9 @@
             </li>
         </ul>
     </nav>
-
-    <!--div to hold input fields for adding instagram accounts-->
-<div class="columns">
-<div class="column">
-
-<div class="add-container">
-    <div class="level">
-        <div class="level-item" id="add-account">
-            <div class="field">
-                <p class="control">
-                <h1 class="title" id="align-titles">Account Settings</h1>
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div>
-<div class="level">
-        <div class="level-item" id="add-account">
-            <div class="field has-addons">
-                <p class="control">
-                <input class="input" type="text" placeholder="add an account">
-                </p>
-                <p class="control">
-                <button class="button">Add</button>
-                </p>
-        </div>
-    </div>
-    </div>
-</div>
-
-<div>
-    <div class="level">
-            <div class="level-item" id="add-account">
-                <div class="field has-addons">
-                    <p class="control">
-                    <h2 id="align-titles">Connected Accounts</h2>
-                    </p>
-            </div>
-        </div>
-        </div>
-    </div>
-
-</div>
-</div>
-
+    <div class="table-container">
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+          <!-- Your table content -->
+        </table>
+      </div>
 </body>
-</html>
