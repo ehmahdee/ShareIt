@@ -79,4 +79,14 @@ body::-webkit-scrollbar-track {
   display: block;
 }
 
+.card {
+  background: #F0ECE4;
+  height: 400px;
+  width: 400px;
+  position: absolute;
+  top: 20%;
+  margin: -50px 0 0 -50px;
+  border-radius: 5px;
+}
+
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
