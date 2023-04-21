@@ -1,8 +1,6 @@
 
-const appId = '1390452918164568';
-const appSecret = 'd5cf8133a13037a4451f32ce05bc2848';
-
-// "EAATwnAxDnFgBANNSX2MRaZCQH4ZAXnZBFjDn38P2xD3q591KrIdDyO44jhBZBSzlAwyNkl1uEgaZC6Xe3HRZCb6M54dV0a5VtjZAmF0ZANgrZASpEu3bmyL0T26vKcNkqLZAiSn4mtcEQZC7uXvwkl4eRvnrlcS1BpRl8Q8HNhCZCC8zWhZBoAcQ8ZAiq2G2jv6J8bfpqNrEY3o0QkSkCVYIDs4dQF"
+const appId = process.env.FB_CLIENT_ID;
+const appSecret = process.env.FB_CLIENT_SECRET;;
 
 const querystring = window.location.href.split('/')[3];
 const urlParams = new URLSearchParams(querystring);
