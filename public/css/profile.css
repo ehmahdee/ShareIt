@@ -67,6 +67,12 @@ body::-webkit-scrollbar-track {
 .link-text {
   display: none;
   margin-left: 1rem;
+  color: white;
+  transition: color 200ms ease;
+}
+
+.link-text:hover {
+  color: var(--liteblu);
 }
 
 .nav-bar:hover .link-text {
