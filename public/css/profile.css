@@ -33,6 +33,7 @@ body::-webkit-scrollbar-track {
   position: fixed;
   background-color: var(--purp);
   transition: width 200ms ease;
+  z-index: 2;
 }
 
 .nav-bar:hover {
@@ -80,14 +81,29 @@ body::-webkit-scrollbar-track {
   display: block;
 }
 
-.card {
+.columns {
+  left: 5rem;
+  margin-top: 0% !important;
+}
+
+.add-container {
+  padding-top: 50px;
+}
+
+.level {
   background: #F0ECE4;
-  height: 400px;
-  width: 400px;
-  position: absolute;
-  top: 20%;
-  margin: -50px 0 0 -50px;
+  height: 200px;
+  width: 100%;
+  margin: 0;
   border-radius: 5px;
+}
+
+#align-titles {
+  margin-left: 20px;
+}
+
+#add-account {
+  
 }
 
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";

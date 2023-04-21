@@ -26,6 +26,7 @@ body {
     position: fixed;
     background-color: var(--purp);
     transition: width 200ms ease;
+    z-index: 2;
   }
   
   .nav-bar:hover {
