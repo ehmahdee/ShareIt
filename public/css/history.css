@@ -10,9 +10,8 @@
   body {
     margin: 0;
     padding: 0;
-    height: 100vh;
+    height: 100%;
     font-family: 'Comfortaa', cursive;
-    background-color: var(--background);
   }
   
   main {
@@ -80,5 +79,27 @@
   .nav-bar:hover .link-text {
     display: block;
   }
+
+  .drpdwn-container {
+    margin-left: 5.5rem;
+  }
+
+  .dropdown {
+    margin-top: 0.5rem;
+  }
   
+  .column {
+    margin-top: 4rem;
+    margin-left: 8.5rem;
+  }
+
+  .post-container {
+  background: #F0ECE4;
+  height: 350px;
+  width: 350px;
+  border-radius: 5px;
+  border: 0.5rem solid var(--liteblu);
+  margin-top: 2rem;
+  }
+
   @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
