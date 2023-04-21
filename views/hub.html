@@ -55,9 +55,12 @@
     <!--div to hold graphic elements-->
     
     <!--div to contain upload capabilities-->
-    <div class="is-flex is-justify-content-center">
+    <div class="upload-container is-flex is-justify-content-center">
     <div class="cloud-container is-flex is-justify-content-center">
         <span class="no-image">No Image</span>
+    </div>
+    <div class="progbar">
+    <progress class="progress is-small is-primary" id="p-bar" max="100">15%</progress>
     </div>
     <div class="button-container field is-grouped">
         <p class="control">
@@ -71,7 +74,6 @@
           </button>
         </p>
       </div>
-        <progress class="progbar progress is-small is-primary" max="100">15%</progress>
     </div>
 </body>
 </html>

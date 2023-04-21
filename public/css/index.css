@@ -5,13 +5,15 @@
   --pinkpurp: #EFA9F2;
   --litepink: #FDEBF9;
   --liteblu: #C0DBEA;
+  --background: #FAF3E5
 }
 
 body {
   margin: 0;
   padding: 0;
+  height: 100vh;
   font-family: 'Comfortaa', cursive;
-  background-color: magenta;
+  background-color: var(--background);
 }
 
 main {
@@ -24,6 +26,11 @@ main {
   position: absolute;
   background-color: orangered;
   transition: width 200ms ease;
+  z-index: 2;
+}
+
+.login-bar:hover {
+  width: 30rem;
 }
 
 .login-form {
@@ -45,10 +52,6 @@ main {
 .top-input-box {
   display: none;
   margin-left: 1rem;
-}
-
-.login-bar:hover {
-  width: 30rem;
 }
 
 .login-bar:hover .top-input-box {

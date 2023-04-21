@@ -5,14 +5,16 @@
     --pinkpurp: #EFA9F2;
     --litepink: #FDEBF9;
     --liteblu: #C0DBEA;
-  }
-  
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Comfortaa', cursive;
-    background-color: magenta;
-  }
+    --background: #FAF3E5
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: 'Comfortaa', cursive;
+  background-color: var(--background);
+}
   
   main {
     margin-left: 5rem;
@@ -89,12 +91,28 @@
 
   .button-container {
   position: absolute;
-  top: 75%;
-  margin: -50px 0 0 -50px;
+  bottom: 27%;
+  }
+
+  .upload-container {
+    position: relative;
+    height: 100vh;
   }
 
   .progbar {
+    margin-right: 30%;
     display: none;
+    
+  }
+
+  .progress {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  #p-bar {
+    position: absolute;
+    bottom: 20%;
   }
 
   @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
