@@ -13,7 +13,7 @@ body {
   padding: 0;
   height: 100vh;
   font-family: 'Comfortaa', cursive;
-  background-color: var(--background);
+  background-image: linear-gradient(to bottom right, var(--purp), var(--background));
 }
 
 main {
@@ -22,9 +22,9 @@ main {
 
 .login-bar {
   height: 100vh;
-  width: 5rem;
+  width: 15rem;
   position: absolute;
-  background-color: orangered;
+  background-color: orange;
   transition: width 200ms ease;
   z-index: 2;
 }
@@ -34,24 +34,54 @@ main {
 }
 
 .login-form {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  margin-top: 30%;
   display: flex;
-  flex-direction: column;
-  align-items: center
-}
-
-.login-form {
-  display: flex;
-  align-items: center;
   height: 5rem;
   text-decoration: none;
+  list-style: none;
+  flex-direction: column;
+  align-items: center;
 }
 
 .top-input-box {
   display: none;
-  margin-left: 1rem;
+  border-radius: 2px;
+}
+
+input[type=text] {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 4px solid var(--purp);
+  background-color: orange;
+  color: white;
+}
+
+input[type=text]:focus {
+  background-color: blue;
+}
+
+button {
+background-color: var(--lilac);
+border: none;
+border-width: 12px;
+color: black;
+padding: 12px 20px;
+margin: 8px 0;
+font-size: 16px;
+width: 50%;
+cursor: pointer;
+}
+
+#sign-up {
+  padding: 12px 20px;
+  font-family: 'Comfortaa', cursive;
+  font-size: 16px;
+  margin: 8px 0;
+  color: white;
+  text-align: center;
 }
 
 .login-bar:hover .top-input-box {
