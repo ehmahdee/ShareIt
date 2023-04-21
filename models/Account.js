@@ -11,7 +11,7 @@ Account.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    type: {
+    platform: {
       type: DataTypes.STRING,
       allowNull: false,
     },
