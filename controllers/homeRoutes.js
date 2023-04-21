@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { test } = require('node:test');
-const { Project, User } = require('../models');
+const { User } = require('../models');
 const withAuth = require('../utils/auth');
 
 const li_client_id = process.env.LI_CLIENT_ID;
@@ -34,7 +34,24 @@ function litoken (query) {
     } 
   }
 }
+router.get('/hub', async (req, res) => {
+  try {
+    // Get all projects and JOIN with user data
+    // const projectData = await User.findAll({
+    // });
 
+    // Serialize data so the template can read it
+    // const projects = projectData.map((project) => project.get({ plain: true }));
+
+    // Pass serialized data and session flag into template
+    res.render('hub', { 
+      logged_in: req.session.logged_in 
+    });
+    // res.json({key:process.env.FB_CLIENT_SECRET})
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 
 
@@ -58,27 +75,27 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/project/:id', async (req, res) => {
-  try {
-    const projectData = await Project.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ['name'],
-        },
-      ],
-    });
+// router.get('/project/:id', async (req, res) => {
+//   try {
+//     const projectData = await Project.findByPk(req.params.id, {
+//       include: [
+//         {
+//           model: User,
+//           attributes: ['name'],
+//         },
+//       ],
+//     });
 
-    const project = projectData.get({ plain: true });
+//     const project = projectData.get({ plain: true });
 
-    res.render('project', {
-      ...project,
-      logged_in: req.session.logged_in
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+//     res.render('project', {
+//       ...project,
+//       logged_in: req.session.logged_in
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 // Use withAuth middleware to prevent access to route
 router.get('/profile', withAuth, async (req, res) => {
