@@ -102,8 +102,25 @@ body::-webkit-scrollbar-track {
   margin-left: 20px;
 }
 
-#add-account {
-  
+.button-container {
+  margin-left: 5rem;
+}
+
+#button-line {
+  margin-left: 6.5rem;
+}
+
+.tbl-title {
+margin-bottom: 0%;
+}
+
+.tbl-container {
+  margin-left: 5rem;
+}
+
+.table {
+  margin-right: 20px !important;
+  width: 600px !important;
 }
 
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
