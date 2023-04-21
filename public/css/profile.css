@@ -1,10 +1,12 @@
 :root {
   --lilac: #FDF4F5;
   --purmag: #E8A0BF;
-  --purp: #BA90C6;
-  --pinkpurp: #EFA9F2;
-  --litepink: #FDEBF9;
-  --background: #FAF3E5
+  --purp: #7e66d0;
+  --borderpurp: #947fe8;
+  --graypurp: #d0cdde;
+  --liteblu: #C0DBEA;
+  --accentpurp: #5929c9;
+  --background: #e9f2fa;
 }
 
 body {

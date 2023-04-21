@@ -1,11 +1,12 @@
 :root {
   --lilac: #FDF4F5;
   --purmag: #E8A0BF;
-  --purp: #BA90C6;
-  --pinkpurp: #EFA9F2;
-  --litepink: #FDEBF9;
+  --purp: #7e66d0;
+  --borderpurp: #947fe8;
+  --graypurp: #d0cdde;
   --liteblu: #C0DBEA;
-  --background: #FAF3E5
+  --accentpurp: #5929c9;
+  --background: #e9f2fa;
 }
 
 body {
@@ -22,9 +23,9 @@ main {
 
 .login-bar {
   height: 100vh;
-  width: 15rem;
+  width: 10rem;
   position: absolute;
-  background-color: orange;
+  background-color: #5929c9;
   transition: width 200ms ease;
   z-index: 2;
 }
@@ -54,17 +55,17 @@ input[type=text] {
   margin: 8px 0;
   box-sizing: border-box;
   border: none;
-  border-bottom: 4px solid var(--purp);
-  background-color: orange;
+  border-bottom: 4px solid #947fe8;
+  background-color: #5929c9;
   color: white;
 }
 
 input[type=text]:focus {
-  background-color: blue;
+  background-color: #947fe8;
 }
 
 button {
-background-color: var(--lilac);
+background-color: #e9f2fa;
 border: none;
 border-width: 12px;
 color: black;
@@ -80,7 +81,7 @@ cursor: pointer;
   font-family: 'Comfortaa', cursive;
   font-size: 16px;
   margin: 8px 0;
-  color: white;
+  color: #e9f2fa;
   text-align: center;
 }
 
@@ -88,7 +89,11 @@ cursor: pointer;
   display: block;
 }
 
-.logo img { 
+.logo {
+  padding: 15px;
+}
+
+.logo img {
   transform: rotate(0deg);
   transition: 500ms;
 
