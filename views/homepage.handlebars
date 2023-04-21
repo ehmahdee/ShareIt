@@ -1,42 +1,51 @@
 
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;500&display=swap" rel="stylesheet">
 
 <div>
-  <!--will need login button in sliding css element-->
   <div class="login-bar">
     <div class="logo">
-      <img src="./assets/img/SiPurp.png" alt="Share.it logo">
+      <img id="logo" src="../public/assets/Shareitlogo.png" alt="Share.it logo">
     </div>
     <form class="login-form">
-      <input type="text" class="top-input-box" placeholder="Username" />
-      <input type="password" class="top-input-box" placeholder="Password" />
-      <a href="#" class="top-input-box">
+      <input type="text" id='email-login'class="top-input-box " placeholder="E-mail" />
+      <input type="text" id='password-login' class="top-input-box" placeholder="Password" />
+      <button class="top-input-box" id="login-btn" type="submit" >Login</button>
+      <a href="#" class="top-input-box" id="sign-up">
         New here? Sign up!
       </a>
-      <a href="#" class="top-input-box">
+      <a href="#" class="top-input-box" id="sign-up">
         Forgot your password?
       </a>
-      <button class="top-input-box">LOGIN</button>
     </form>
+    
   </div>
-  <div class="m-scroll">
-    <div class="m-scroll__title">
-      <div>
-        <h1>
-          <a>Share.it </a>
-          <a>Share.it </a>
-          <a>Share.it </a>
-          <a>Share.it </a>
-          <a>Share.it </a>
-          <a>Share.it </a>
-          <a>Share.it </a>
-          <a>Share.it </a>
-        </h1>
-      </div>
+</div>
+
+<main>
+  <div class="pic-background"></div>
+  <div class="child-centered">
+    <img src="../assets/img/group-multiracial-happy-friends-taking-selfie-having-fun-beach-95898337.jpg"
+      alt="a group of friends taking a selfie">
+  </div>
+</main>
+
+<div class="m-scroll">
+  <div class="m-scroll__title">
+    <div>
+      <h1>
+        <a>Share.it </a>
+        <a>Share.it </a>
+        <a>Share.it </a>
+        <a>Share.it </a>
+        <a>Share.it </a>
+        <a>Share.it </a>
+        <a>Share.it </a>
+        <a>Share.it </a>
+      </h1>
     </div>
   </div>
 </div>
@@ -46,4 +55,5 @@
   '>Login to Instagram</a>
   </div>
   
+<script src="./js/login.js"></script>
 <script src="./js/token.js"></script>
