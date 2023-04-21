@@ -3,6 +3,42 @@ const { test } = require('node:test');
 const { Project, User } = require('../models');
 const withAuth = require('../utils/auth');
 
+const li_client_id = process.env.LI_CLIENT_ID;
+const li_client_secret = process.env.LI_CLIENT_SECRET;
+
+function litoken (query) {
+   let key;
+  if (query.code || query.state) {
+    console.log("linked")
+    if (query.state !== 'foobar') {
+      console.error('Unauthorized Access');
+    } else {
+      const exchangeAccessToken = async () => {
+        try {
+          const response = await fetch(`https://www.linkedin.com/oauth/v2/accessToken?code=${query.code}&grant_type=authorization_code&client_id=${li_client_id}&client_secret=${li_client_secret}&redirect_uri=http://localhost:3001/test`);
+          key = await response.json();
+          console.log(key);
+        } catch (err) {
+          console.error(err);
+        }
+        try {
+          console.log(key.access_token);
+          const profileData = await fetch('https://api.linkedin.com/v2/me',{headers:{Authorization: `Bearer ${key.access_token}`, method: 'GET'}});
+          let data = await profileData.json();
+          console.log(data);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+      exchangeAccessToken();
+    } 
+  }
+}
+
+
+
+
+
 router.get('/', async (req, res) => {
   try {
     // Get all projects and JOIN with user data
@@ -71,7 +107,22 @@ router.get('/login', (req, res) => {
     return;
   }
 
-  res.render('login', {key:process.env.LI_CLIENT_ID});
+  res.render('login', {li_key:process.env.LI_CLIENT_ID, li_cs:process.env.LI_CLIENT_SECRET});
+
 });
+
+router.get('/test', async (req, res) => {
+  // If the user is already logged in, redirect the request to another route
+
+ if (!req.query) {
+
+  res.render('test1', {li_key:process.env.LI_CLIENT_ID, li_cs:process.env.LI_CLIENT_SECRET});
+ } else {
+    console.log(req.query);
+    litoken(req.query);
+    res.render('test1', {li_key:process.env.LI_CLIENT_ID, li_cs:process.env.LI_CLIENT_SECRET});
+ }
+});
+
 
 module.exports = router;
