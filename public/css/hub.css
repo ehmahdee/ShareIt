@@ -1,11 +1,12 @@
 :root {
-    --lilac: #FDF4F5;
-    --purmag: #E8A0BF;
-    --purp: #BA90C6;
-    --pinkpurp: #EFA9F2;
-    --litepink: #FDEBF9;
-    --liteblu: #C0DBEA;
-    --background: #FAF3E5
+  --lilac: #FDF4F5;
+  --purmag: #E8A0BF;
+  --purp: #7e66d0;
+  --borderpurp: #947fe8;
+  --graypurp: #d0cdde;
+  --liteblu: #C0DBEA;
+  --accentpurp: #5929c9;
+  --background: #e9f2fa;
 }
 
 body {
@@ -75,14 +76,14 @@ body {
   }
 
   .cloud-container {
-  background: #F0ECE4;
+  background: #d0cdde;
   height: 400px;
   width: 400px;
   position: absolute;
   top: 20%;
   margin: -50px 0 0 -50px;
   border-radius: 5px;
-  border: 0.5rem solid var(--liteblu);
+  border: 0.5rem solid #5929c9;
   }
 
   .no-image {
@@ -95,7 +96,16 @@ body {
   bottom: 27%;
   }
 
+  #upload {
+    background-color: #d0cdde;
+  }
+
+  #cancel {
+    background-color: orange;
+  }
+
   .upload-container {
+    margin-left: 5rem;
     position: relative;
     height: 100vh;
   }
