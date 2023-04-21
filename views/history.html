@@ -22,6 +22,7 @@
     ></script>
 </head>
 <body>
+    <!--NAVBAR-->
     <nav class="nav-bar">
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -50,9 +51,52 @@
             </li>
         </ul>
     </nav>
-    <div class="table-container">
-        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-          <!-- Your table content -->
-        </table>
-      </div>
+    
+    <!--Drop down menu to select account-->
+    <div class="drpdwn-container">
+        <div class="dropdown">
+            <div class="dropdown-trigger">
+              <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                <span>Select Account</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu" role="menu">
+              <div class="dropdown-content">
+                <a href="#" class="dropdown-item">
+                  Account 1
+                </a>
+                <a class="dropdown-item">
+                  Account 2
+                </a>
+                <a href="#" class="dropdown-item is-active">
+                  Account 3
+                </a>
+                <a href="#" class="dropdown-item">
+                  Account 4
+                </a>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <!--Preview of previous posts-->
+    <div class="columns">
+        <div class="column" id="col-one">
+            <div class="post-container"></div>
+            <div class="post-container"></div>
+            <div class="post-container"></div>
+            <div class="post-container"></div>
+        </div>
+        
+        <div class="column" id="col-two">
+            <div class="post-container"></div>
+            <div class="post-container"></div>
+            <div class="post-container"></div>
+            <div class="post-container"></div>
+        </div>
+    </div>
+
 </body>

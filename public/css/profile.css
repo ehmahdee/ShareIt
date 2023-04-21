@@ -12,7 +12,6 @@ body {
   padding: 0;
   height: 100vh;
   font-family: 'Comfortaa', cursive;
-  background-color: var(--background);
 }
 
 main {
@@ -86,8 +85,17 @@ body::-webkit-scrollbar-track {
   margin-top: 0% !important;
 }
 
-.add-container {
+.title-container {
   padding-top: 50px;
+  margin-left: 5rem;
+}
+
+.level-left {
+  background: #F0ECE4;
+  height: 200px;
+  width: 100%;
+  margin: 0;
+  border-radius: 5px;
 }
 
 .level {
@@ -99,7 +107,7 @@ body::-webkit-scrollbar-track {
 }
 
 #align-titles {
-  margin-left: 20px;
+  margin-left: 5rem;
 }
 
 .button-container {
@@ -108,6 +116,8 @@ body::-webkit-scrollbar-track {
 
 #button-line {
   margin-left: 6.5rem;
+  justify-content: space-evenly !important;
+  margin-right: 2rem;
 }
 
 .tbl-title {

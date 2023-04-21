@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,13 +18,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;500&display=swap" rel="stylesheet">
 
     <!--Font Awesome Link-->
-    <script
-      src="https://kit.fontawesome.com/f3e5b655dc.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/f3e5b655dc.js" crossorigin="anonymous"></script>
 
 </head>
+
 <body>
+    <!--NAVBAR-->
     <nav class="nav-bar">
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -53,119 +53,116 @@
         </ul>
     </nav>
 
-    <!--div to hold input fields for adding instagram accounts-->
-<div class="columns">
-<div class="column">
+    <!--div for body-->
+    <div class="columns">
+        <div class="column">
 
-<div class="add-container">
-    <div class="level">
-        <div class="level-item">
-            <div class="field">
-                <p class="control">
-                <h1 class="title" id="align-titles">Account Settings</h1>
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div>
-    <div class="level button-container">
-        <div class="field is-grouped" id="button-line">
-            <p class="control">
-                <button class="button is-medium">
-                    <span class="icon">
-                      <i class="fab fa-instagram"></i>
-                    </span>
-                    <span>instagram</span>
-                  </button>
-            </p>
-            <p class="control">
-                <button class="button is-medium">
-                    <span class="icon">
-                      <i class="fab fa-linkedin-in"></i>
-                    </span>
-                    <span>LinkedIn</span>
-                  </button>
-            </p>
-            <p class="control">
-                <button class="button is-medium">
-                    <span class="icon">
-                      <i class="fab fa-square-facebook"></i>
-                    </span>
-                    <span>Facebook</span>
-                  </button>
-            </p>
-            <p class="control">
-                <button class="button is-medium">
-                    <span class="icon">
-                      <i class="fab fa-pinterest"></i>
-                    </span>
-                    <span>Pinterest</span>
-                  </button>
-            </p>
-            <p class="control">
-                <button class="button is-medium">
-                    <span class="icon">
-                      <i class="fab fa-twitter"></i>
-                    </span>
-                    <span>Twitter</span>
-                  </button>
-            </p>
-          </div>
-        </div>
-    </div>
-    
-    
-
-        <div class="level tbl-title">
-
-            <div class="level-item">
-                <div class="field">
-                    <p class="control">
-                    <h1 class="title" id="align-titles">Connected Accounts</h1>
-                    </p>
+            <!--page title-->
+            <div class="title-container">
+                <div class="level-left">
+                    <div class="level-item">
+                        <div class="field">
+                            <p class="control">
+                            <h1 class="title" id="align-titles">Account Settings</h1>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            </div>
-            <!--CONTAINER FOR CONNECTED ACCOUNTS-->
-        <div class="level tbl-container">
-            <div class="level-item">
-                <table class="table is-bordered is-hoverable">
-                    <thead>
-                        <tr>
-                            <th>Username</th>
-                            <th>Platform</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Username</th>
-                            <th>Platform</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <a href="https://www.instagram.com/emmaedaily/">@emmaedaily</a>
-                            </td>
-                        
-                        
-                            <td>
+
+            <!--buttons-->
+            
+                
+                    <div class="field is-grouped" id="button-line">
+                        <p class="control">
+                            <button class="button is-medium">
                                 <span class="icon">
                                     <i class="fab fa-instagram"></i>
-                                  </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                </span>
+                                <span>instagram</span>
+                            </button>
+                        </p>
+                        <p class="control">
+                            <button class="button is-medium">
+                                <span class="icon">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </span>
+                                <span>LinkedIn</span>
+                            </button>
+                        </p>
+                        <p class="control">
+                            <button class="button is-medium">
+                                <span class="icon">
+                                    <i class="fab fa-square-facebook"></i>
+                                </span>
+                                <span>Facebook</span>
+                            </button>
+                        </p>
+                        <p class="control">
+                            <button class="button is-medium">
+                                <span class="icon">
+                                    <i class="fab fa-pinterest"></i>
+                                </span>
+                                <span>Pinterest</span>
+                            </button>
+                        </p>
+                        <p class="control">
+                            <button class="button is-medium">
+                                <span class="icon">
+                                    <i class="fab fa-twitter"></i>
+                                </span>
+                                <span>Twitter</span>
+                            </button>
+                        </p>
+                    </div>
+                
+            
+
+
+            <!--Connected Title-->
+            <div class="title-container">
+                <div class="level-left">
+                    <div class="level-item">
+                        <div class="field">
+                            <p class="control">
+                            <h1 class="title" id="align-titles">Connected Accounts</h1>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <!--CONTAINER FOR CONNECTED ACCOUNTS TABLE-->
+            <div class="level-left tbl-container">
+                <div class="level-item">
+                    <table class="table is-bordered is-hoverable">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Platform</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <a href="https://www.instagram.com/emmaedaily/">@emmaedaily</a>
+                                </td>
+                                <td>
+                                    <span class="icon">
+                                        <i class="fab fa-instagram"></i>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
         </div>
-
-    
-
-</div>
-</div>
+    </div>
 
 </body>
+
 </html>
