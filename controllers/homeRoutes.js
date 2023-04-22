@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { test } = require('node:test');
-const { User } = require('../models');
+
+const {  User } = require('../models');
+
 const withAuth = require('../utils/auth');
 
 const li_client_id = process.env.LI_CLIENT_ID;
@@ -34,46 +36,23 @@ function litoken (query) {
     } 
   }
 }
-router.get('/hub', async (req, res) => {
-  try {
-    // Get all projects and JOIN with user data
-    // const projectData = await User.findAll({
-    // });
-
-    // Serialize data so the template can read it
-    // const projects = projectData.map((project) => project.get({ plain: true }));
-
-    // Pass serialized data and session flag into template
-    res.render('hub', { 
-      logged_in: req.session.logged_in 
-    });
-    // res.json({key:process.env.FB_CLIENT_SECRET})
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 
 
 
 
 router.get('/', async (req, res) => {
   try {
-    // Get all projects and JOIN with user data
-    const projectData = await User.findAll({
-    });
+    
+    res.render('hub', {
 
-    // Serialize data so the template can read it
-    // const projects = projectData.map((project) => project.get({ plain: true }));
-
-    // Pass serialized data and session flag into template
-    res.render('homepage', { 
       logged_in: req.session.logged_in 
     });
-    // res.json({key:process.env.FB_CLIENT_SECRET})
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
+
 
 // router.get('/project/:id', async (req, res) => {
 //   try {
@@ -103,7 +82,7 @@ router.get('/profile', withAuth, async (req, res) => {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Project }],
+      include: [{ model: Account }],
     });
 
     const user = userData.get({ plain: true });
@@ -120,7 +99,7 @@ router.get('/profile', withAuth, async (req, res) => {
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
-    res.redirect('/profile');
+    res.redirect('/hub');
     return;
   }
 
