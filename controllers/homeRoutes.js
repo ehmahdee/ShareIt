@@ -40,10 +40,22 @@ function litoken (query) {
 
 
 
-router.get('/', async (req, res) => {
+router.get('/hub', async (req, res) => {
   try {
     
     res.render('hub', {
+
+      logged_in: req.session.logged_in 
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/', async (req, res) => {
+  try {
+    
+    res.render('homepage', {
 
       logged_in: req.session.logged_in 
     });
@@ -87,7 +99,7 @@ router.get('/profile', withAuth, async (req, res) => {
 
     const user = userData.get({ plain: true });
 
-    res.render('profile', {
+    res.render('hub', {
       ...user,
       logged_in: true
     });
