@@ -4,10 +4,16 @@ const { test } = require('node:test');
 const {  User } = require('../models');
 
 const withAuth = require('../utils/auth');
+const { error } = require('console');
 
+// .env keys
 const li_client_id = process.env.LI_CLIENT_ID;
 const li_client_secret = process.env.LI_CLIENT_SECRET;
+const appId = process.env.FB_CLIENT_ID;
+const appSecret = process.env.FB_CLIENT_SECRET;;
 
+// linkedin login functionality
+// TODO: creae Model with information received from linkedin
 function litoken (query) {
    let key;
   if (query.code || query.state) {
@@ -17,7 +23,7 @@ function litoken (query) {
     } else {
       const exchangeAccessToken = async () => {
         try {
-          const response = await fetch(`https://www.linkedin.com/oauth/v2/accessToken?code=${query.code}&grant_type=authorization_code&client_id=${li_client_id}&client_secret=${li_client_secret}&redirect_uri=http://localhost:3001/test`);
+          const response = await fetch(`https://www.linkedin.com/oauth/v2/accessToken?code=${query.code}&grant_type=authorization_code&client_id=${li_client_id}&client_secret=${li_client_secret}&redirect_uri=http://localhost:3001/profile/linkedin`);
           key = await response.json();
           console.log(key);
         } catch (err) {
@@ -37,9 +43,83 @@ function litoken (query) {
   }
 }
 
+// instagram login functionality
+// TODO: creae Model with information received from Instagram
+function igtoken (short_access_token) {
+  console.log(short_access_token);
 
 
+  if (short_access_token) {
+      let longAccess_token;
+      let userPageID;
+      let pageAccess_token;
+      const exchangeAccessToken = async () => {
+          try {
+              const response = await fetch(`https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&client_id=${appId}&client_secret=${appSecret}&fb_exchange_token=${short_access_token}`);
+              
+              // if (!response.ok) {
+              //     throw new Error('Access token exchange failed');
+              // }
+              const json = await response.json();
+              console.log(json.access_token); // This is your long-lived access token
+              longAccess_token = json.access_token;
+          } catch (error) {
+              console.error(error);
+              // Display an error message or take some other action
+          }
+          try {
+              // getting user pages
+              const response = await fetch(`https://graph.facebook.com/v16.0/me/accounts?access_token=${longAccess_token}`);
+              if (!response.ok) {
+                  throw new Error('Instagram data fetch failed');
+              }
+              const json = await response.json();
+              console.log(json);
 
+              userPageID = json.data[0].id;
+              console.log(userPageID);
+          } catch (error) {
+              console.error(error);
+              // Display an error message or take some other action
+          }
+          try {
+              const response = await fetch(`https://graph.facebook.com/${userPageID}?fields=access_token&access_token=${longAccess_token}`);
+              
+              // if (!response.ok) {
+              //     throw new Error('Access token exchange failed');
+              // }
+              const json = await response.json();
+              console.log(json.access_token); // This is your Page access token
+              pageAccess_token = json.access_token;
+          } catch (error) {
+              console.error(error);
+              // Display an error message or take some other action
+          }
+          try {
+              // getting IG busines account
+              const response = await fetch(`https://graph.facebook.com/v16.0/${userPageID}?fields=instagram_business_account&access_token=${pageAccess_token}`);
+              // if (!response.ok) {
+              //     throw new Error('Instagram data fetch failed');
+              // }
+              const json = await response.json();
+              console.log(json);
+          } catch (error) {
+              console.error(error);
+              // Display an error message or take some other action
+          }
+      
+      };
+
+      exchangeAccessToken(); // Call the function to exchange the access token
+  }
+}
+
+// 
+//  ROUTES 
+// 
+
+// hub route
+// TODO: Send User and Acoount models
 router.get('/hub', async (req, res) => {
   try {
     
@@ -52,6 +132,7 @@ router.get('/hub', async (req, res) => {
   }
 });
 
+// Homepage route
 router.get('/', async (req, res) => {
   try {
     
@@ -88,6 +169,8 @@ router.get('/', async (req, res) => {
 //   }
 // });
 
+// Profile route
+// TODO: Include Accounts model with User model
 // Use withAuth middleware to prevent access to route
 router.get('/profile', withAuth, async (req, res) => {
   try {
@@ -98,7 +181,9 @@ router.get('/profile', withAuth, async (req, res) => {
 
     const user = userData.get({ plain: true });
 
-    res.render('hub', {
+    res.render('profile', { 
+      li_key:process.env.LI_CLIENT_ID, 
+      fb_ci:process.env.FB_CLIENT_ID,
       ...user,
       logged_in: true
     });
@@ -106,6 +191,7 @@ router.get('/profile', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 
 router.get('/login', (req, res) => {
   // If the user is already logged in, redirect the request to another route
@@ -118,17 +204,54 @@ router.get('/login', (req, res) => {
 
 });
 
-router.get('/test', async (req, res) => {
-  // If the user is already logged in, redirect the request to another route
 
+// linkedin redirect
+router.get('/profile/linkedin', async (req, res) => {
  if (!req.query) {
-
-  res.render('test1', {li_key:process.env.LI_CLIENT_ID, li_cs:process.env.LI_CLIENT_SECRET});
+  res.render('profile', { 
+      li_key:process.env.LI_CLIENT_ID, 
+      fb_ci:process.env.FB_CLIENT_ID,
+      ...user,
+      logged_in: true
+    });
  } else {
     console.log(req.query);
     litoken(req.query);
-    res.render('test1', {li_key:process.env.LI_CLIENT_ID, li_cs:process.env.LI_CLIENT_SECRET});
+    res.render('profile', { 
+      li_key:process.env.LI_CLIENT_ID, 
+      fb_ci:process.env.FB_CLIENT_ID,
+      ...user,
+      logged_in: true
+    });
  }
+});
+
+// ISSUE HERE****
+// instagram redirect
+router.get('/profile/instagram', async (req, res) => {
+  console.log("line232" + req.query);
+  const short_access_token = req.query.access_token;
+  if (!short_access_token) {
+    // res.render('error', {
+    //   message: 'Access token not found',
+    //   error: {}
+    // });
+      res.render('profile', { 
+      li_key:process.env.LI_CLIENT_ID, 
+      fb_ci:process.env.FB_CLIENT_ID,
+      // ...user,
+      logged_in: true
+    });
+  } else {
+    console.log("line246" + req);
+    await igtoken(short_access_token);
+    res.render('profile', {
+      li_key: process.env.LI_CLIENT_ID,
+      fb_ci: process.env.FB_CLIENT_ID,
+      // ...user,
+      logged_in: true
+    });
+  }
 });
 
 
