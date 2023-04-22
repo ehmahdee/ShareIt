@@ -4,30 +4,147 @@
   </div>
 </div>
 
-<div class="row mt-4">
-  <div class="col-md-6">
-    <h3>Create a New Project:</h3>
+    <!--NAVBAR-->
+    <nav class="nav-bar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="./hub.html" class="nav-link">
+            <i class="fa-solid fa-arrow-up-from-bracket" style="color: #fdf4f5;"></i>
+            <span class="link-text logo-text">Upload</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="./history.html" class="nav-link">
+            <i class="fa-solid fa-clock-rotate-left" style="color: #fdf4f5;"></i>
+            <span class="link-text logo-text">History</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-regular fa-paper-plane" style="color: #fdf4f5;"></i>
+            <span class="link-text logo-text">Contact</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="./index.html" class="nav-link">
+            <i class=class="fa-solid fa-door-open" style="color: #fdf4f5;"></i>
+            <span class="link-text logo-text">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    
+    <!--div for body-->
+    <div class="columns">
+      <div class="column">
+    
+        <!--page title-->
+        <div class="title-container">
+          <div class="level-left">
+            <div class="level-item">
+              <div class="field">
+                <p class="control">
+                <h1 class="title" id="align-titles">Account Settings</h1>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!--buttons-->
+    
+    
+        <div class="field is-grouped" id="button-line">
+          <p class="control">
+            <button class="button is-medium">
+              <span class="icon">
+                <i class="fab fa-instagram"></i>
+              </span>
+              <span>instagram</span>
+            </button>
+          </p>
+          <p class="control">
+            <button class="button is-medium">
+              <span class="icon">
+                <i class="fab fa-linkedin-in"></i>
+              </span>
+              <span>LinkedIn</span>
+            </button>
+          </p>
+          <p class="control">
+            <button class="button is-medium">
+              <span class="icon">
+                <i class="fab fa-square-facebook"></i>
+              </span>
+              <span>Facebook</span>
+            </button>
+          </p>
+          <p class="control">
+            <button class="button is-medium">
+              <span class="icon">
+                <i class="fab fa-pinterest"></i>
+              </span>
+              <span>Pinterest</span>
+            </button>
+          </p>
+          <p class="control">
+            <button class="button is-medium">
+              <span class="icon">
+                <i class="fab fa-twitter"></i>
+              </span>
+              <span>Twitter</span>
+            </button>
+          </p>
+        </div>
+    
+    
+    
+    
+        <!--Connected Title-->
+        <div class="title-container">
+          <div class="level-left">
+            <div class="level-item">
+              <div class="field">
+                <p class="control">
+                <h1 class="title" id="align-titles">Connected Accounts</h1>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!--CONTAINER FOR CONNECTED ACCOUNTS TABLE-->
+        <div class="level-left tbl-container">
+          <div class="level-item">
+            <table class="table is-bordered is-hoverable">
+              <thead>
+                <tr>
+                  <th>Username</th>
+                  <th>Platform</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <a href="https://www.instagram.com/emmaedaily/">@emmaedaily</a>
+                  </td>
+                  <td>
+                    <span class="icon">
+                      <i class="fab fa-instagram"></i>
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    
+    
+    
+      </div>
+    </div>
 
-    <form class="form new-project-form">
-      <div class="form-group">
-        <label for="project-name">project name:</label>
-        <input class="form-input" type="text" id="project-name" name="project-name" />
-      </div>
-      <div class="form-group">
-        <label for="project-funding">needed funding ($):</label>
-        <input class="form-input" type="number" id="project-funding" name="project-funding" />
-      </div>
-      <div class="form-group">
-        <label for="project-desc">description:</label>
-        <textarea class="form-input" id="project-desc" name="project-desc"></textarea>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Create</button>
-      </div>
-    </form>
-  </div>
-
-  {{#if projects.length}}
+  {{!-- {{#if projects.length}}
   <div class="col-md-6 project-list">
     <h3>Current Projects:</h3>
 
@@ -43,6 +160,6 @@
     {{/each}}
   </div>
   {{/if}}
-</div>
+</div> --}}
 
 <script src="./js/profile.js"></script>
