@@ -1,9 +1,26 @@
+
+<link rel="stylesheet" href="./css/profile.css">
+
+<!--bulma link-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+<!--Google Fonts-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;500&display=swap" rel="stylesheet">
+
+<!--Font Awesome Link-->
+<script src="https://kit.fontawesome.com/f3e5b655dc.js" crossorigin="anonymous"></script>
+
+
 <div class="row">
   <div class="col-auto">
     <h2>Welcome, {{name}}!</h2>
   </div>
 </div>
 
+
+    {{!-- TDODO: update links to controller routes --}}
     <!--NAVBAR-->
     <nav class="nav-bar">
       <ul class="navbar-nav">
@@ -56,20 +73,24 @@
     
         <div class="field is-grouped" id="button-line">
           <p class="control">
+            <a href='https://www.facebook.com/v16.0/dialog/oauth?client_id={{fb_ci}}&display=page&extras={"setup":{"channel":"IG_API_ONBOARDING"}}&redirect_uri=http://localhost:3001/profile/instagram/&response_type=token&scope=instagram_basic,instagram_content_publish,instagram_manage_comments,instagram_manage_insights,pages_show_list,pages_read_engagement'>
             <button class="button is-medium">
               <span class="icon">
                 <i class="fab fa-instagram"></i>
               </span>
               <span>instagram</span>
             </button>
+            </a>
           </p>
           <p class="control">
+            <a href='https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id={{li_key}}&redirect_uri=http://localhost:3001/profile/linkedin&state=foobar&scope=r_liteprofile%20r_emailaddress%20w_member_social'>
             <button class="button is-medium">
               <span class="icon">
                 <i class="fab fa-linkedin-in"></i>
               </span>
               <span>LinkedIn</span>
             </button>
+            </a>
           </p>
           <p class="control">
             <button class="button is-medium">
@@ -162,4 +183,4 @@
   {{/if}}
 </div> --}}
 
-<script src="./js/profile.js"></script>
+{{!-- <script src="./js/profile.js"></script> --}}
