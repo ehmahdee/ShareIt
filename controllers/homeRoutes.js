@@ -1,5 +1,9 @@
 const router = require('express').Router();
 const { test } = require('node:test');
+const fetch = require('node-fetch');
+const url = require('url');
+
+// const { queryParser } = require('express-query-parser')
 
 const {  User } = require('../models');
 
@@ -15,7 +19,7 @@ const appSecret = process.env.FB_CLIENT_SECRET;;
 // linkedin login functionality
 // TODO: creae Model with information received from linkedin
 function litoken (query) {
-   let key;
+  let key;
   if (query.code || query.state) {
     console.log("linked")
     if (query.state !== 'foobar') {
@@ -30,10 +34,29 @@ function litoken (query) {
           console.error(err);
         }
         try {
-          console.log(key.access_token);
+          console.log("access token " + key.access_token);
+          // save above to account models as access token
           const profileData = await fetch('https://api.linkedin.com/v2/me',{headers:{Authorization: `Bearer ${key.access_token}`, method: 'GET'}});
           let data = await profileData.json();
           console.log(data);
+          // TODO: parse this data to get user info
+            // data.localizedLastName = last name
+            // data.localizedFirstName = first name
+            // data.id =m_id
+          //           {
+          //   localizedLastName: 'Dadbin',
+          //   profilePicture: { displayImage: 'urn:li:digitalmediaAsset:D5603AQHNp1GGf8wq7g' },
+          //   firstName: {
+          //     localized: { en_US: 'Josh' },
+          //     preferredLocale: { country: 'US', language: 'en' }
+          //   },
+          //   lastName: {
+          //     localized: { en_US: 'Dadbin' },
+          //     preferredLocale: { country: 'US', language: 'en' }
+          //   },
+          //   id: 'IaHbXU7bgj',
+          //   localizedFirstName: 'Josh'
+          // }
         } catch (err) {
           console.error(err);
         }
@@ -207,52 +230,71 @@ router.get('/login', (req, res) => {
 
 // linkedin redirect
 router.get('/profile/linkedin', async (req, res) => {
- if (!req.query) {
-  res.render('profile', { 
-      li_key:process.env.LI_CLIENT_ID, 
-      fb_ci:process.env.FB_CLIENT_ID,
-      ...user,
-      logged_in: true
-    });
- } else {
-    console.log(req.query);
-    litoken(req.query);
-    res.render('profile', { 
-      li_key:process.env.LI_CLIENT_ID, 
-      fb_ci:process.env.FB_CLIENT_ID,
-      ...user,
-      logged_in: true
-    });
- }
-});
+  // try{
+  //   // Find the logged in user based on the session ID
+  //   const userData = await User.findByPk(req.session.user_id, {
+  //   attributes: { exclude: ['password'] }
+  //   });
 
+  //   const user = userData.get({ plain: true });
+
+    if (!req.query) {
+      res.render('profile', { 
+          li_key:process.env.LI_CLIENT_ID, 
+          fb_ci:process.env.FB_CLIENT_ID,
+          // ...user,
+          logged_in: true
+        });
+    } else {
+        console.log(req.query);
+        litoken(req.query);
+        res.render('profile', { 
+          li_key:process.env.LI_CLIENT_ID, 
+          fb_ci:process.env.FB_CLIENT_ID,
+          // ...user,
+          logged_in: true
+        });
+    }
+  // } catch (err) {
+  //   res.status(500).json(err);
+  // }
+});
 // ISSUE HERE****
 // instagram redirect
-router.get('/profile/instagram', async (req, res) => {
-  console.log("line232" + req.query);
-  const short_access_token = req.query.access_token;
-  if (!short_access_token) {
-    // res.render('error', {
-    //   message: 'Access token not found',
-    //   error: {}
-    // });
-      res.render('profile', { 
-      li_key:process.env.LI_CLIENT_ID, 
-      fb_ci:process.env.FB_CLIENT_ID,
-      // ...user,
-      logged_in: true
-    });
-  } else {
-    console.log("line246" + req);
-    await igtoken(short_access_token);
-    res.render('profile', {
-      li_key: process.env.LI_CLIENT_ID,
-      fb_ci: process.env.FB_CLIENT_ID,
-      // ...user,
-      logged_in: true
-    });
-  }
-});
+// router.get('/profile/instagram/?#:key', async (req, res) => {
+//   try {
+//     const key = await req.params.key;
+//     console.log("line232" + key);
+//     // const short_access_token = req.query.access_token;
+//     // if (!short_access_token) {
+//     //   // res.render('error', {
+//     //   //   message: 'Access token not found',
+//     //   //   error: {}
+//     //   // });
+//     //     res.render('profile', { 
+//     //     li_key:process.env.LI_CLIENT_ID, 
+//     //     fb_ci:process.env.FB_CLIENT_ID,
+//     //     // ...user,
+//     //     logged_in: true
+//     //   });
+//     // } else {
+//     //   console.log("line246" + req);
+//     //   await igtoken(short_access_token);
+//     //   res.render('profile', {
+//     //     li_key: process.env.LI_CLIENT_ID,
+//     //     fb_ci: process.env.FB_CLIENT_ID,
+//     //     // ...user,
+//     //     logged_in: true
+//     //   });
+//     // }
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
+// router.get('/profile/instagram', queryParser({ parser: 'simple' }), async (req, res) => {
+//   const accessToken = await req.query.access_token;
+//   console.log('Access token:', accessToken);
+// });
 
 module.exports = router;
