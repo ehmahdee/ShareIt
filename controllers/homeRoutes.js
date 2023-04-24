@@ -168,22 +168,22 @@ router.get('/', async (req, res) => {
 // TODO: Include Accounts model with User model
 // Use withAuth middleware to prevent access to route
 router.get('/profile', async (req, res) => {
-  try {
-    // Find the logged in user based on the session ID
+  // try {
+  //   // Find the logged in user based on the session ID
 
-    // const userData = await User.findByPk(req.session.user_id, {
-    //   attributes: { exclude: ['password'] }
-    // });
+  //   const userData = await User.findByPk(req.session.user_id, {
+  //     attributes: { exclude: ['password'] }
+  //   });
 
-    // const user = userData.get({ plain: true });
-    // const accountsData = await Account.findAll({
-    //   where: {
-    //     user_id: req.session.user_id,
-    //     platform: 'LinkedIn',
-    //   },
-    // });
-    // const accounts = accountsData.map((account) => account.get({ plain: true }));
-    // console.log('user data',user,accounts);
+  //   const user = userData.get({ plain: true });
+  //   const accountsData = await Account.findAll({
+  //     where: {
+  //       user_id: req.session.user_id,
+  //       platform: 'LinkedIn',
+  //     },
+  //   });
+  //   const accounts = accountsData.map((account) => account.get({ plain: true }));
+  //   console.log('user data',user,accounts);
 
 
     res.render('profile', { 
@@ -194,9 +194,9 @@ router.get('/profile', async (req, res) => {
       logged_in: true
     });
     
-  } catch (err) {
-    res.status(500).json(err);
-  }
+  // } catch (err) {
+  //   res.status(500).json(err);
+  // }
 });
 
 
@@ -215,12 +215,12 @@ router.get('/login', (req, res) => {
 // linkedin redirect
 router.get('/profile/linkedin', async (req, res) => {
   // try{
-  //   // Find the logged in user based on the session ID
-  //   const userData = await User.findByPk(req.session.user_id, {
-  //   attributes: { exclude: ['password'] }
-  //   });
+    // Find the logged in user based on the session ID
+    // const userData = await User.findByPk(req.session.user_id, {
+    // attributes: { exclude: ['password'] }
+    // });
 
-  //   const user = userData.get({ plain: true });
+    // const user = userData.get({ plain: true });
 
     if (!req.query) {
       res.render('profile', { 
@@ -235,7 +235,7 @@ router.get('/profile/linkedin', async (req, res) => {
         res.render('profile', { 
           li_key:process.env.LI_CLIENT_ID, 
           fb_ci:process.env.FB_CLIENT_ID,
-           //...user,
+          // ...user,
           logged_in: true
         });
     }
