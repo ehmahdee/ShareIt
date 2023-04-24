@@ -107,7 +107,7 @@ function igtoken (short_access_token) {
               //     throw new Error('Access token exchange failed');
               // }
               const json = await response.json();
-              console.log("Page Access Token:  "json.access_token); // This is your Page access token
+              console.log("Page Access Token:  " + json.access_token); // This is your Page access token
               pageAccess_token = json.access_token;
           } catch (error) {
               console.error(error);
@@ -189,8 +189,8 @@ router.get('/profile', async (req, res) => {
     res.render('profile', { 
       li_key:process.env.LI_CLIENT_ID, 
       fb_ci:process.env.FB_CLIENT_ID,
-      // ...user,
-      // accounts,
+      ...user,
+      accounts,
       logged_in: true
     });
     

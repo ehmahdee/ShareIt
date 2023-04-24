@@ -103,6 +103,13 @@ cursor: pointer;
 transform: rotate(360deg);
 }
 
+.blurb-container {
+  margin-left: 10rem;
+  font-size: 40px;
+  color: var(--background);
+  font-family: 'Comfortaa', cursive;
+}
+
 .pic-background {
   background: orange;
   height: 600px;
@@ -121,6 +128,44 @@ transform: rotate(360deg);
   left: 48%;
   margin: -50px 0 0 -50px;
 }
+
+.modal-wrap {
+  background: var(--borderpurp);
+  position: fixed;
+  width: 650px;
+  top: 30%;
+}
+
+.form-group {
+  margin-left: 20%;
+  width: 500px;
+  color: white;
+  font-family: 'Comfortaa', cursive;
+}
+
+#sign-btn {
+  margin-top: 10px;
+  background-color: var(--purp);
+  margin-left: 10%;
+  color: white;
+  font-family: 'Comfortaa', cursive;
+}
+
+#password-signup {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 4px solid #947fe8;
+  background-color: #5929c9;
+  color: white;
+}
+
+#password-signup:focus {
+  background-color: #947fe8;
+}
+
 
 .m-scroll {
   display: flex;
