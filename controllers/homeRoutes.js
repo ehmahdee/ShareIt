@@ -169,28 +169,28 @@ router.get('/', async (req, res) => {
 // Use withAuth middleware to prevent access to route
 router.get('/profile', async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
+//  Find the logged in user based on the session ID
 
-    // const userData = await User.findByPk(req.session.user_id, {
-    //   attributes: { exclude: ['password'] }
-    // });
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] }
+    });
 
-    // const user = userData.get({ plain: true });
-    // const accountsData = await Account.findAll({
-    //   where: {
-    //     user_id: req.session.user_id,
-    //     platform: 'LinkedIn',
-    //   },
-    // });
-    // const accounts = accountsData.map((account) => account.get({ plain: true }));
-    // console.log('user data',user,accounts);
+    const user = userData.get({ plain: true });
+    const accountsData = await Account.findAll({
+      where: {
+        user_id: req.session.user_id,
+        // platform: 'LinkedIn',
+      },
+    });
+    const accounts = accountsData.map((account) => account.get({ plain: true }));
+    console.log('user data',user,accounts);
 
 
     res.render('profile', { 
       li_key:process.env.LI_CLIENT_ID, 
       fb_ci:process.env.FB_CLIENT_ID,
       ...user,
-      accounts,
+      ...accounts,
       logged_in: true
     });
     
@@ -214,19 +214,27 @@ router.get('/login', (req, res) => {
 
 // linkedin redirect
 router.get('/profile/linkedin', async (req, res) => {
-  // try{
-  //   // Find the logged in user based on the session ID
-  //   const userData = await User.findByPk(req.session.user_id, {
-  //   attributes: { exclude: ['password'] }
-  //   });
+  try{
+    // Find the logged in user based on the session ID
+    const userData = await User.findByPk(req.session.user_id, {
+    attributes: { exclude: ['password'] }
+    });
 
-  //   const user = userData.get({ plain: true });
+    const user = userData.get({ plain: true });
+ 
+//    const accountsData = await Account.findAll({
+//       where: {
+//         user_id: req.session.user_id,
 
+//       },
+//     });
+  //  const accounts = accountsData.map((account) => account.get({ plain: true }));
     if (!req.query) {
       res.render('profile', { 
           li_key:process.env.LI_CLIENT_ID, 
           fb_ci:process.env.FB_CLIENT_ID,
-          // ...user,
+          ...user,
+ //         ...accounts,
           logged_in: true
         });
     } else {
@@ -235,13 +243,14 @@ router.get('/profile/linkedin', async (req, res) => {
         res.render('profile', { 
           li_key:process.env.LI_CLIENT_ID, 
           fb_ci:process.env.FB_CLIENT_ID,
-           //...user,
+           ...user,
+//           ...accounts,
           logged_in: true
         });
     }
-  // } catch (err) {
-  //   res.status(500).json(err);
-  // }
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 // ISSUE HERE****
 // instagram redirect
