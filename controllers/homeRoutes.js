@@ -21,7 +21,7 @@ const appSecret = process.env.FB_CLIENT_SECRET;;
 
 const Account = require('../models/Account');
 
-async function litoken(query) {
+async function litoken(query,user_id) {
   let key;
   if (query.code || query.state) {
     console.log("linked")
@@ -48,6 +48,7 @@ async function litoken(query) {
             sm_id: data.id,
             access_token: key.access_token,
             secondary_id: data.localizedLastName + ', ' + data.firstName.localized.en_US,
+            user_id: user_id
           });
 
 
@@ -169,19 +170,22 @@ router.get('/', async (req, res) => {
 router.get('/profile', async (req, res) => {
   try {
     // Find the logged in user based on the session ID
-    // const userData = await User.findByPk(req.session.user_id, {
-    //   attributes: { exclude: ['password'] }
-    // });
 
-    // const user = userData.get({ plain: true });
-    // const accountsData = await Account.findAll({
-    //   where: {
-    //     user_id: req.session.user_id,
-    //     platform: 'LinkedIn',
-    //   },
-    // });
-    // const accounts = accountsData.map((account) => account.get({ plain: true }));
-    // console.log('user data',user);
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] }
+    });
+
+    const user = userData.get({ plain: true });
+    const accountsData = await Account.findAll({
+      where: {
+        user_id: req.session.user_id,
+        platform: 'LinkedIn',
+      },
+    });
+    const accounts = accountsData.map((account) => account.get({ plain: true }));
+    console.log('user data',user,accounts);
+
+
     res.render('profile', { 
       li_key:process.env.LI_CLIENT_ID, 
       fb_ci:process.env.FB_CLIENT_ID,
@@ -189,6 +193,7 @@ router.get('/profile', async (req, res) => {
       // accounts,
       logged_in: true
     });
+    
   } catch (err) {
     res.status(500).json(err);
   }
@@ -226,7 +231,7 @@ router.get('/profile/linkedin', async (req, res) => {
         });
     } else {
         console.log(req.query);
-        litoken(req.query);
+        litoken(req.query,req.session.user_id);
         res.render('profile', { 
           li_key:process.env.LI_CLIENT_ID, 
           fb_ci:process.env.FB_CLIENT_ID,
