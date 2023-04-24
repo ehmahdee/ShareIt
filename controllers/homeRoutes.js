@@ -42,7 +42,7 @@ function litoken (query) {
           // TODO: parse this data to get user info
             // data.localizedLastName = last name
             // data.localizedFirstName = first name
-            // data.id =m_id
+            // data.id =sm_id
           //           {
           //   localizedLastName: 'Dadbin',
           //   profilePicture: { displayImage: 'urn:li:digitalmediaAsset:D5603AQHNp1GGf8wq7g' },
@@ -195,19 +195,19 @@ router.get('/', async (req, res) => {
 // Profile route
 // TODO: Include Accounts model with User model
 // Use withAuth middleware to prevent access to route
-router.get('/profile', withAuth, async (req, res) => {
+router.get('/profile', async (req, res) => {
   try {
     // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] }
-    });
+    // const userData = await User.findByPk(req.session.user_id, {
+    //   attributes: { exclude: ['password'] }
+    // });
 
-    const user = userData.get({ plain: true });
+    // const user = userData.get({ plain: true });
 
     res.render('profile', { 
       li_key:process.env.LI_CLIENT_ID, 
       fb_ci:process.env.FB_CLIENT_ID,
-      ...user,
+      // ...user,
       logged_in: true
     });
   } catch (err) {
@@ -292,9 +292,11 @@ router.get('/profile/linkedin', async (req, res) => {
 //   }
 // });
 
-// router.get('/profile/instagram', queryParser({ parser: 'simple' }), async (req, res) => {
-//   const accessToken = await req.query.access_token;
-//   console.log('Access token:', accessToken);
-// });
+router.post('/profile/instagram/', (req, res) => {
+  console.log(req.body);
+  // const { query } = url.parse(req.url, true);
+  // const accessToken = query.access_token;
+  // console.log('Access token:', accessToken);
+});
 
 module.exports = router;
