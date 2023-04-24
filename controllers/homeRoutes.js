@@ -204,7 +204,8 @@ router.get('/profile', withAuth, async (req, res) => {
       },
     });
     const accounts = accountsData.map((account) => account.get({ plain: true }));
-    console.log('user data',user);
+    console.log('user data',user,accounts);
+
     res.render('profile', { 
       li_key:process.env.LI_CLIENT_ID, 
       fb_ci:process.env.FB_CLIENT_ID,
@@ -212,6 +213,7 @@ router.get('/profile', withAuth, async (req, res) => {
       accounts,
       logged_in: true
     });
+    
   } catch (err) {
     res.status(500).json(err);
   }
