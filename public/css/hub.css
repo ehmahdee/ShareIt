@@ -75,16 +75,7 @@ body {
     display: block;
   }
 
-  .cloud-container {
-  background: #d0cdde;
-  height: 400px;
-  width: 400px;
-  position: absolute;
-  top: 20%;
-  margin: -50px 0 0 -50px;
-  border-radius: 5px;
-  border: 0.5rem solid #5929c9;
-  }
+ 
 
   .no-image {
     font-size: 40px;
@@ -124,6 +115,17 @@ body {
   #p-bar {
     position: absolute;
     bottom: 20%;
+  }
+
+  #upload_widget {
+   background: #d0cdde;
+  height: 400px;
+  width: 400px;
+  position: absolute;
+  top: 20%;
+  margin: -50px 0 0 -50px;
+  border-radius: 5px;
+  border: 0.5rem solid #5929c9;
   }
 
   @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
