@@ -1,0 +1,100 @@
+:root {
+    --lilac: #FDF4F5;
+    --purmag: #E8A0BF;
+    --purp: #7e66d0;
+    --borderpurp: #947fe8;
+    --graypurp: #d0cdde;
+    --liteblu: #C0DBEA;
+    --accentpurp: #5929c9;
+    --background: #e9f2fa;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: 'Comfortaa', cursive !important;
+    background-color: #F0ECE4;
+  }
+  
+  main {
+    margin-left: 5rem;
+  }
+  
+  body::-webkit-scrollbar {
+    width: 0.25rem
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: var(--purp)
+  }
+  
+  .nav-bar {
+    height: 100vh;
+    width: 5rem;
+    position: fixed;
+    background-color: var(--purp);
+    transition: width 200ms ease;
+    z-index: 2;
+  }
+  
+  .nav-bar:hover {
+    width: 15rem;
+  }
+  
+  .navbar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center
+  }
+  
+  .nav-item {
+    width: 100%
+  }
+  
+  .nav-link {
+    display: flex;
+    align-items: center;
+    height: 5rem;
+    text-decoration: none;
+  }
+  
+  .nav-link i {
+    width: 2rem;
+    min-width: 2rem;
+    margin: 0 1.5rem;
+  }
+  
+  .link-text {
+    display: none;
+    margin-left: 1rem;
+    color: white;
+    transition: color 200ms ease;
+  }
+  
+  .link-text:hover {
+    color: var(--liteblu);
+  }
+  
+  .nav-bar:hover .link-text {
+    display: block;
+  }
+
+  .title-contr {
+    margin-left: 6.5rem;
+    margin-bottom: 4rem;
+  }
+
+   .contact-contr{
+    margin-left: 5rem !important;
+    margin-right: 5rem !important;
+    position: relative;
+    height: 400px;
+    width: 1000px;
+    
+  }
+
+ 

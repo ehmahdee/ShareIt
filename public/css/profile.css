@@ -14,6 +14,7 @@ body {
   padding: 0;
   height: 100vh;
   font-family: 'Comfortaa', cursive;
+  background: #F0ECE4;
 }
 
 main {
@@ -114,12 +115,14 @@ body::-webkit-scrollbar-track {
 
 .button-container {
   margin-left: 5rem;
+  background: #F0ECE4;
 }
 
 #button-line {
   margin-left: 6.5rem;
   justify-content: space-evenly !important;
   margin-right: 2rem;
+  background: #F0ECE4;
 }
 
 .tbl-title {
@@ -127,7 +130,8 @@ margin-bottom: 0%;
 }
 
 .tbl-container {
-  margin-left: 5rem;
+  margin-top: 0%;
+  margin-left: 6rem;
 }
 
 .table {

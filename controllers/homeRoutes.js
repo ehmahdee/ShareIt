@@ -189,8 +189,8 @@ router.get('/profile', async (req, res) => {
     res.render('profile', { 
       li_key:process.env.LI_CLIENT_ID, 
       fb_ci:process.env.FB_CLIENT_ID,
-      // ...user,
-      // accounts,
+      ...user,
+      accounts,
       logged_in: true
     });
     
