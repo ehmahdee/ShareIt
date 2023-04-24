@@ -18,7 +18,10 @@ const appSecret = process.env.FB_CLIENT_SECRET;;
 
 // linkedin login functionality
 // TODO: creae Model with information received from linkedin
-function litoken (query) {
+
+const Account = require('../models/Account');
+
+async function litoken(query) {
   let key;
   if (query.code || query.state) {
     console.log("linked")
@@ -35,34 +38,25 @@ function litoken (query) {
         }
         try {
           console.log("access token " + key.access_token);
-          // save above to account models as access token
           const profileData = await fetch('https://api.linkedin.com/v2/me',{headers:{Authorization: `Bearer ${key.access_token}`, method: 'GET'}});
           let data = await profileData.json();
-          console.log(data);
-          // TODO: parse this data to get user info
-            // data.localizedLastName = last name
-            // data.localizedFirstName = first name
-            // data.id =m_id
-          //           {
-          //   localizedLastName: 'Dadbin',
-          //   profilePicture: { displayImage: 'urn:li:digitalmediaAsset:D5603AQHNp1GGf8wq7g' },
-          //   firstName: {
-          //     localized: { en_US: 'Josh' },
-          //     preferredLocale: { country: 'US', language: 'en' }
-          //   },
-          //   lastName: {
-          //     localized: { en_US: 'Dadbin' },
-          //     preferredLocale: { country: 'US', language: 'en' }
-          //   },
-          //   id: 'IaHbXU7bgj',
-          //   localizedFirstName: 'Josh'
-          // }
+          console.log('linkedIn',data);
+
+          // Save the LinkedIn data to an Account model
+          await Account.create({
+            platform: 'LinkedIn',
+            sm_id: data.id,
+            access_token: key.access_token,
+            secondary_id: data.localizedLastName + ', ' + data.firstName.localized.en_US,
+          });
+
+
         } catch (err) {
           console.error(err);
         }
-      }
+      };
       exchangeAccessToken();
-    } 
+    }
   }
 }
 
@@ -202,11 +196,19 @@ router.get('/profile', withAuth, async (req, res) => {
     });
 
     const user = userData.get({ plain: true });
-
+    const accountsData = await Account.findAll({
+      where: {
+        user_id: req.session.user_id,
+        platform: 'LinkedIn',
+      },
+    });
+    const accounts = accountsData.map((account) => account.get({ plain: true }));
+    console.log('user data',user);
     res.render('profile', { 
       li_key:process.env.LI_CLIENT_ID, 
       fb_ci:process.env.FB_CLIENT_ID,
       ...user,
+      accounts,
       logged_in: true
     });
   } catch (err) {
@@ -250,7 +252,7 @@ router.get('/profile/linkedin', async (req, res) => {
         res.render('profile', { 
           li_key:process.env.LI_CLIENT_ID, 
           fb_ci:process.env.FB_CLIENT_ID,
-          // ...user,
+           //...user,
           logged_in: true
         });
     }

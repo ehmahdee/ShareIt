@@ -128,6 +128,7 @@
               <div class="field">
                 <p class="control">
                 <h1 class="title" id="align-titles">Connected Accounts</h1>
+                
                 </p>
               </div>
             </div>
@@ -155,6 +156,21 @@
                     </span>
                   </td>
                 </tr>
+                 <tr>
+                    <td>
+                      {{#each accounts}}
+                      <div>
+                        <h3>{{this.secondary_id}}</h3>
+                        <p></p>
+                      </div>
+                    {{/each}}
+                    </td>
+                    <td>
+                      <span class="icon">
+                        <i class="fab fa-linkedin-in"></i>
+                      </span>
+                    </td>
+                  </tr>
               </tbody>
             </table>
           </div>
