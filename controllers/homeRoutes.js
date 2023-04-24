@@ -79,7 +79,7 @@ function igtoken (short_access_token) {
               //     throw new Error('Access token exchange failed');
               // }
               const json = await response.json();
-              console.log(json.access_token); // This is your long-lived access token
+              console.log("long lived access token:  " + json.access_token); // This is your long-lived access token
               longAccess_token = json.access_token;
           } catch (error) {
               console.error(error);
@@ -95,7 +95,7 @@ function igtoken (short_access_token) {
               console.log(json);
 
               userPageID = json.data[0].id;
-              console.log(userPageID);
+              console.log("User Page ID:  " + userPageID);
           } catch (error) {
               console.error(error);
               // Display an error message or take some other action
@@ -107,7 +107,7 @@ function igtoken (short_access_token) {
               //     throw new Error('Access token exchange failed');
               // }
               const json = await response.json();
-              console.log(json.access_token); // This is your Page access token
+              console.log("Page Access Token:  "json.access_token); // This is your Page access token
               pageAccess_token = json.access_token;
           } catch (error) {
               console.error(error);
@@ -120,7 +120,7 @@ function igtoken (short_access_token) {
               //     throw new Error('Instagram data fetch failed');
               // }
               const json = await response.json();
-              console.log(json);
+              console.log("IG ID:  " + json);
           } catch (error) {
               console.error(error);
               // Display an error message or take some other action
@@ -163,28 +163,6 @@ router.get('/', async (req, res) => {
 });
 
 
-
-// router.get('/project/:id', async (req, res) => {
-//   try {
-//     const projectData = await Project.findByPk(req.params.id, {
-//       include: [
-//         {
-//           model: User,
-//           attributes: ['name'],
-//         },
-//       ],
-//     });
-
-//     const project = projectData.get({ plain: true });
-
-//     res.render('project', {
-//       ...project,
-//       logged_in: req.session.logged_in
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
 
 // Profile route
 // TODO: Include Accounts model with User model
