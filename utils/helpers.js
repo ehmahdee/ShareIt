@@ -21,6 +21,20 @@ module.exports = {
   },
   json: function(obj) {
     return JSON.stringify(obj);
+  },
+
+  platform: function(ptype){
+    if(ptype==="instagram"){
+      return "<fab fa-instagram>"
+    }else if (ptype==="facebook"){
+      return "<fab fa-square-facebook>"
+    }else if (ptype==="Twitter"){
+      return "<fab fa-twitter>"
+    }else if (ptype==="linkedin"){
+      return "<fab fa-linkedin-in>"
+    }else{
+      return "<fab fa-pinterest>"
+    }
   }
 };
 

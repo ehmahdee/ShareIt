@@ -73,8 +73,8 @@
     
         <div class="field is-grouped" id="button-line">
           <p class="control">
-            <a href='https://www.facebook.com/v16.0/dialog/oauth?client_id={{fb_ci}}&display=page&extras={"setup":{"channel":"IG_API_ONBOARDING"}}&redirect_uri=http://localhost:3001/profile/instagram/&response_type=token&scope=instagram_basic,instagram_content_publish,instagram_manage_comments,instagram_manage_insights,pages_show_list,pages_read_engagement'>
-            <button class="button is-medium">
+            <a href='https://www.facebook.com/v16.0/dialog/oauth?client_id={{fb_ci}}&display=page&extras={"setup":{"channel":"IG_API_ONBOARDING"}}&redirect_uri=http://localhost:3001/profile/&response_type=token&scope=instagram_basic,instagram_content_publish,instagram_manage_comments,instagram_manage_insights,pages_show_list,pages_read_engagement'>
+            <button id="instagram-redirect" class="button is-medium">
               <span class="icon">
                 <i class="fab fa-instagram"></i>
               </span>
@@ -191,5 +191,7 @@
   </div>
   {{/if}}
 </div> --}}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+  integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/js/profile.js"></script>
 
-{{!-- <script src="./js/profile.js"></script> --}}

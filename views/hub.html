@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hub</title>
 
+    <!--Style-->
+    <link rel="stylesheet" href="../public/css/reset.css">
     <link rel="stylesheet" href="../public/css/hub.css">
 
     <!--bulma link-->
@@ -57,14 +59,78 @@
     <!--div to hold graphic elements-->
     
     <!--div to contain upload capabilities-->
-    <div class="upload-container is-flex is-justify-content-center">
-    <div class="cloud-container is-flex is-justify-content-center">
-        <span class="no-image">No Image</span>
+    <div class="upload-container">
+        <div class="cloud-container is-flex is-justify-content-center">
+            <button id="upload_widget" class="cloudinary-button">Upload files</button>
+        <div id="image-container"></div>
+        </div>
+        <div class= "tbl-container">
+            <div>
+                <table class="table is-bordered is-hoverable">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Platform</th>
+                            <th>Select</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="https://www.instagram.com/emmaedaily/">@emmaedaily</a>
+                            </td>
+                            <td>
+                                <span class="icon">
+                                    <i class="fab fa-instagram"></i>
+                                </span>
+                            </td>
+                            <td>
+                                <label class="checkbox">
+                                <input type="checkbox">
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+
+    
+    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+        var myWidget = cloudinary.createUploadWidget({
+            cloudName: 'dov0ohe0b',
+            uploadPreset: 'eihxr5yn'
+        }, (error, result) => {
+            if (!error && result && result.event === "success") {
+                console.log('Done! Here is the image info: ', result.info.url, result);
+                const button = document.getElementById('upload_widget');
+                button.style.display = "none";
+
+                const img = document.createElement('img');
+                img.src = result.info.url;
+
+                // Append the img element to the image container
+                const imageContainer = document.getElementById('image-container');
+                imageContainer.appendChild(img);
+            }
+        }
+        )
+
+        document.getElementById("upload_widget").addEventListener("click", function () {
+            myWidget.open();
+        }, false);
+    </script>
+
+    <!-- progbar -->
     <div class="progbar">
     <progress class="progress is-small is-primary" id="p-bar" max="100">15%</progress>
     </div>
-    <div class="button-container field is-grouped">
+
+    <!-- buttons -->
+    <!-- <div class="button-container field is-grouped">
         <p class="control">
           <button class="button is-hovered" id="upload">
             Create a new post
@@ -75,8 +141,9 @@
             Cancel
           </button>
         </p>
-      </div>
-    </div>
+      </div> -->
+
+    
 
 </body>
 </html>

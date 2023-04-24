@@ -189,9 +189,10 @@ router.get('/', async (req, res) => {
 // Profile route
 // TODO: Include Accounts model with User model
 // Use withAuth middleware to prevent access to route
-router.get('/profile', withAuth, async (req, res) => {
+router.get('/profile', async (req, res) => {
   try {
     // Find the logged in user based on the session ID
+
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] }
     });
@@ -206,11 +207,12 @@ router.get('/profile', withAuth, async (req, res) => {
     const accounts = accountsData.map((account) => account.get({ plain: true }));
     console.log('user data',user,accounts);
 
+
     res.render('profile', { 
       li_key:process.env.LI_CLIENT_ID, 
       fb_ci:process.env.FB_CLIENT_ID,
-      ...user,
-      accounts,
+      // ...user,
+      // accounts,
       logged_in: true
     });
     
@@ -296,9 +298,13 @@ router.get('/profile/linkedin', async (req, res) => {
 //   }
 // });
 
-// router.get('/profile/instagram', queryParser({ parser: 'simple' }), async (req, res) => {
-//   const accessToken = await req.query.access_token;
-//   console.log('Access token:', accessToken);
-// });
+router.post('/profile/instagram/', (req, res) => {
+  
+  // console.log(req.headers.stuff);
+  let short_access_token = req.headers.stuff.slice(1, req.headers.stuff.length);
+  short_access_token = short_access_token.split('&')
+  short_access_token = short_access_token[0].split('=')[1]
+  igtoken(short_access_token);
+});
 
 module.exports = router;
