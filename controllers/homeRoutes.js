@@ -158,7 +158,6 @@ router.get('/hub', async (req, res) => {
 // Homepage route
 router.get('/', async (req, res) => {
   try {
-    
     res.render('homepage', {
 
       logged_in: req.session.logged_in 
