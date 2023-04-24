@@ -25,15 +25,15 @@ module.exports = {
 
   platform: function(ptype){
     if(ptype==="instagram"){
-      return "<fab fa-instagram>"
+      return "fab fa-instagram"
     }else if (ptype==="facebook"){
-      return "<fab fa-square-facebook>"
+      return "fab fa-square-facebook"
     }else if (ptype==="Twitter"){
-      return "<fab fa-twitter>"
+      return "fab fa-twitter"
     }else if (ptype==="linkedin"){
-      return "<fab fa-linkedin-in>"
+      return "fab fa-linkedin-in"
     }else{
-      return "<fab fa-pinterest>"
+      return "fab fa-pinterest"
     }
   }
 };
