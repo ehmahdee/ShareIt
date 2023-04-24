@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hub</title>
 
+    <!--Style-->
+    <link rel="stylesheet" href="../public/css/reset.css">
     <link rel="stylesheet" href="../public/css/hub.css">
 
     <!--bulma link-->
@@ -57,10 +59,40 @@
     <!--div to hold graphic elements-->
     
     <!--div to contain upload capabilities-->
-    <div class="upload-container is-flex is-justify-content-center">
+    <div class="upload-container">
         <div class="cloud-container is-flex is-justify-content-center">
             <button id="upload_widget" class="cloudinary-button">Upload files</button>
         <div id="image-container"></div>
+        </div>
+        <div class= "tbl-container">
+            <div>
+                <table class="table is-bordered is-hoverable">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Platform</th>
+                            <th>Select</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="https://www.instagram.com/emmaedaily/">@emmaedaily</a>
+                            </td>
+                            <td>
+                                <span class="icon">
+                                    <i class="fab fa-instagram"></i>
+                                </span>
+                            </td>
+                            <td>
+                                <label class="checkbox">
+                                <input type="checkbox">
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -111,7 +143,7 @@
         </p>
       </div> -->
 
-    </div>
+    
 
 </body>
 </html>
