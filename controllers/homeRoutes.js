@@ -107,7 +107,7 @@ function igtoken (short_access_token) {
               //     throw new Error('Access token exchange failed');
               // }
               const json = await response.json();
-              console.log("Page Access Token:  "json.access_token); // This is your Page access token
+              console.log("Page Access Token:  " + json.access_token); // This is your Page access token
               pageAccess_token = json.access_token;
           } catch (error) {
               console.error(error);
@@ -171,19 +171,19 @@ router.get('/profile', async (req, res) => {
   try {
     // Find the logged in user based on the session ID
 
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] }
-    });
+    // const userData = await User.findByPk(req.session.user_id, {
+    //   attributes: { exclude: ['password'] }
+    // });
 
-    const user = userData.get({ plain: true });
-    const accountsData = await Account.findAll({
-      where: {
-        user_id: req.session.user_id,
-        platform: 'LinkedIn',
-      },
-    });
-    const accounts = accountsData.map((account) => account.get({ plain: true }));
-    console.log('user data',user,accounts);
+    // const user = userData.get({ plain: true });
+    // const accountsData = await Account.findAll({
+    //   where: {
+    //     user_id: req.session.user_id,
+    //     platform: 'LinkedIn',
+    //   },
+    // });
+    // const accounts = accountsData.map((account) => account.get({ plain: true }));
+    // console.log('user data',user,accounts);
 
 
     res.render('profile', { 
