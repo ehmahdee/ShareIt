@@ -19,7 +19,7 @@ Account.init(
       type: DataTypes.STRING,
     },
     access_token: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(500),
     },
     secondary_id: {
       type: DataTypes.STRING,

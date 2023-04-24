@@ -134,7 +134,7 @@
             </div>
           </div>
         </div>
-    
+        
         <!--CONTAINER FOR CONNECTED ACCOUNTS TABLE-->
         <div class="level-left tbl-container">
           <div class="level-item">
@@ -146,9 +146,15 @@
                 </tr>
               </thead>
               <tbody>
+              
                 <tr>
                   <td>
-                    <a href="https://www.instagram.com/emmaedaily/">@emmaedaily</a>
+                    {{#if accounts.length}}   
+                    {{#each accounts as |account|}}
+                    {{account.secondary_id}}
+                    <a href="https://www.{{account.platform}}.com/{{user_id}}/">@{{user_id}}</a>
+                    {{/each}}
+                    {{/if}}
                   </td>
                   <td>
                     <span class="icon">
@@ -156,26 +162,13 @@
                     </span>
                   </td>
                 </tr>
-                 <tr>
-                    <td>
-                      {{#each accounts}}
-                      <div>
-                        <h3>{{this.secondary_id}}</h3>
-                        <p></p>
-                      </div>
-                    {{/each}}
-                    </td>
-                    <td>
-                      <span class="icon">
-                        <i class="fab fa-linkedin-in"></i>
-                      </span>
-                    </td>
-                  </tr>
+                
               </tbody>
             </table>
+
           </div>
         </div>
-    
+        
     
     
       </div>
