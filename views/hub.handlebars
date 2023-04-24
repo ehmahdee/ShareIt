@@ -68,6 +68,8 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {{#if accounts.length}}
+            {{#each accounts as |account|}}
                         <tr>
                             <td>
                                 <a href="https://www.instagram.com/emmaedaily/">@emmaedaily</a>
@@ -83,6 +85,8 @@
                                 </label>
                             </td>
                         </tr>
+                        {{/each}}
+            {{/if}}
                     </tbody>
                 </table>
             </div>

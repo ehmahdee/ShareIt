@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="../css/profile.css">
 
 <!--bulma link-->
@@ -20,178 +19,181 @@
 </div>
 
 
-    {{!-- TDODO: update links to controller routes --}}
-    <!--NAVBAR-->
-    <nav class="nav-bar">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a href="/hub" id='hub-redirect' class="nav-link">
-            <i class="fa-solid fa-arrow-up-from-bracket" style="color: #fdf4f5;"></i>
-            <span class="link-text logo-text">Upload</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="./history.html" class="nav-link">
-            <i class="fa-solid fa-clock-rotate-left" style="color: #fdf4f5;"></i>
-            <span class="link-text logo-text">History</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="fa-regular fa-paper-plane" style="color: #fdf4f5;"></i>
-            <span class="link-text logo-text">Contact</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="/" class="nav-link">
-            <i class=class="fa-solid fa-door-open" style="color: #fdf4f5;"></i>
-            <span class="link-text logo-text">Logout</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-    
-    <!--div for body-->
-    <div class="columns">
-      <div class="column">
-    
-        <!--page title-->
-        <div class="title-container">
-          <div class="level-left">
-            <div class="level-item">
-              <div class="field">
-                <p class="control">
-                <h1 class="title" id="align-titles">Account Settings</h1>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-    
-        <!--buttons-->
-    
-    
-        <div class="field is-grouped" id="button-line">
-          <p class="control">
-            <a href='https://www.facebook.com/v16.0/dialog/oauth?client_id={{fb_ci}}&display=page&extras={"setup":{"channel":"IG_API_ONBOARDING"}}&redirect_uri=http://localhost:3001/profile/&response_type=token&scope=instagram_basic,instagram_content_publish,instagram_manage_comments,instagram_manage_insights,pages_show_list,pages_read_engagement'>
-            <button id="instagram-redirect" class="button is-medium">
-              <span class="icon">
-                <i class="fab fa-instagram"></i>
-              </span>
-              <span>instagram</span>
-            </button>
-            </a>
-          </p>
-          <p class="control">
-            <a href='https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id={{li_key}}&redirect_uri=http://localhost:3001/profile/linkedin&state=foobar&scope=r_liteprofile%20r_emailaddress%20w_member_social'>
-            <button class="button is-medium">
-              <span class="icon">
-                <i class="fab fa-linkedin-in"></i>
-              </span>
-              <span>LinkedIn</span>
-            </button>
-            </a>
-          </p>
-          <p class="control">
-            <button class="button is-medium">
-              <span class="icon">
-                <i class="fab fa-square-facebook"></i>
-              </span>
-              <span>Facebook</span>
-            </button>
-          </p>
-          <p class="control">
-            <button class="button is-medium">
-              <span class="icon">
-                <i class="fab fa-pinterest"></i>
-              </span>
-              <span>Pinterest</span>
-            </button>
-          </p>
-          <p class="control">
-            <button class="button is-medium">
-              <span class="icon">
-                <i class="fab fa-twitter"></i>
-              </span>
-              <span>Twitter</span>
-            </button>
-          </p>
-        </div>
-    
-    
-    
-    
-        <!--Connected Title-->
-        <div class="title-container">
-          <div class="level-left">
-            <div class="level-item">
-              <div class="field">
-                <p class="control">
-                <h1 class="title" id="align-titles">Connected Accounts</h1>
-                
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!--CONTAINER FOR CONNECTED ACCOUNTS TABLE-->
-        <div class="level-left tbl-container">
-          <div class="level-item">
-            <table class="table is-bordered is-hoverable">
-              <thead>
-                <tr>
-                  <th>Username</th>
-                  <th>Platform</th>
-                </tr>
-              </thead>
-              <tbody>
-              
-                <tr>
-                  <td>
-                    {{#if accounts.length}}   
-                    {{#each accounts as |account|}}
-                    {{account.secondary_id}}
-                    <a href="https://www.{{account.platform}}.com/{{user_id}}/">@{{user_id}}</a>
-                    {{/each}}
-                    {{/if}}
-                  </td>
-                  <td>
-                    <span class="icon">
-                      <i class="fab fa-instagram"></i>
-                    </span>
-                  </td>
-                </tr>
-                
-              </tbody>
-            </table>
+{{!-- TDODO: update links to controller routes --}}
+<!--NAVBAR-->
+<nav class="nav-bar">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a href="/hub" id='hub-redirect' class="nav-link">
+        <i class="fa-solid fa-arrow-up-from-bracket" style="color: #fdf4f5;"></i>
+        <span class="link-text logo-text">Upload</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="./history.html" class="nav-link">
+        <i class="fa-solid fa-clock-rotate-left" style="color: #fdf4f5;"></i>
+        <span class="link-text logo-text">History</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        <i class="fa-regular fa-paper-plane" style="color: #fdf4f5;"></i>
+        <span class="link-text logo-text">Contact</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="/" class="nav-link">
+        <i class=class="fa-solid fa-door-open" style="color: #fdf4f5;"></i>
+        <span class="link-text logo-text">Logout</span>
+      </a>
+    </li>
+  </ul>
+</nav>
 
+<!--div for body-->
+<div class="columns">
+  <div class="column">
+
+    <!--page title-->
+    <div class="title-container">
+      <div class="level-left">
+        <div class="level-item">
+          <div class="field">
+            <p class="control">
+            <h1 class="title" id="align-titles">Account Settings</h1>
+            </p>
           </div>
         </div>
-        
-    
-    
       </div>
     </div>
 
-  {{!-- {{#if projects.length}}
-  <div class="col-md-6 project-list">
-    <h3>Current Projects:</h3>
+    <!--buttons-->
 
-    {{#each projects as |project|}}
-    <div class="row mb-2">
-      <div class="col-md-8">
-        <h4><a href="/project/{{project.id}}">{{project.name}}</a></h4>
-      </div>
-      <div class="col-md-4">
-        <button class="btn btn-sm btn-danger" data-id="{{project.id}}">DELETE</button>
+
+    <div class="field is-grouped" id="button-line">
+      <p class="control">
+        <a
+          href='https://www.facebook.com/v16.0/dialog/oauth?client_id={{fb_ci}}&display=page&extras={"setup":{"channel":"IG_API_ONBOARDING"}}&redirect_uri=http://localhost:3001/profile/&response_type=token&scope=instagram_basic,instagram_content_publish,instagram_manage_comments,instagram_manage_insights,pages_show_list,pages_read_engagement'>
+          <button id="instagram-redirect" class="button is-medium">
+            <span class="icon">
+              <i class="fab fa-instagram"></i>
+            </span>
+            <span>instagram</span>
+          </button>
+        </a>
+      </p>
+      <p class="control">
+        <a
+          href='https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id={{li_key}}&redirect_uri=http://localhost:3001/profile/linkedin&state=foobar&scope=r_liteprofile%20r_emailaddress%20w_member_social'>
+          <button class="button is-medium">
+            <span class="icon">
+              <i class="fab fa-linkedin-in"></i>
+            </span>
+            <span>LinkedIn</span>
+          </button>
+        </a>
+      </p>
+      <p class="control">
+        <button class="button is-medium">
+          <span class="icon">
+            <i class="fab fa-square-facebook"></i>
+          </span>
+          <span>Facebook</span>
+        </button>
+      </p>
+      <p class="control">
+        <button class="button is-medium">
+          <span class="icon">
+            <i class="fab fa-pinterest"></i>
+          </span>
+          <span>Pinterest</span>
+        </button>
+      </p>
+      <p class="control">
+        <button class="button is-medium">
+          <span class="icon">
+            <i class="fab fa-twitter"></i>
+          </span>
+          <span>Twitter</span>
+        </button>
+      </p>
+    </div>
+
+
+
+
+    <!--Connected Title-->
+    <div class="title-container">
+      <div class="level-left">
+        <div class="level-item">
+          <div class="field">
+            <p class="control">
+            <h1 class="title" id="align-titles">Connected Accounts</h1>
+
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-    {{/each}}
+
+    <!--CONTAINER FOR CONNECTED ACCOUNTS TABLE-->
+    <div class="level-left tbl-container">
+      <div class="level-item">
+        <table class="table is-bordered is-hoverable">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Platform</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {{#if accounts.length}}
+            {{#each accounts as |account|}}
+            <tr>
+              <td>
+                {{account.secondary_id}}
+                <a href="https://www.{{account.platform}}.com/{{user_id}}/">@{{user_id}}</a>
+                {{/each}}
+                {{/if}}
+              </td>
+              <td>
+                <span class="icon">
+                  <i class="{{{ platform }}}"></i>
+                </span>
+              </td>
+            </tr>
+            {{/each}}
+            {{/if}}
+
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+
+
   </div>
-  {{/if}}
+</div>
+
+{{!-- {{#if projects.length}}
+<div class="col-md-6 project-list">
+  <h3>Current Projects:</h3>
+
+  {{#each projects as |project|}}
+  <div class="row mb-2">
+    <div class="col-md-8">
+      <h4><a href="/project/{{project.id}}">{{project.name}}</a></h4>
+    </div>
+    <div class="col-md-4">
+      <button class="btn btn-sm btn-danger" data-id="{{project.id}}">DELETE</button>
+    </div>
+  </div>
+  {{/each}}
+</div>
+{{/if}}
 </div> --}}
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"
   integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/js/profile.js"></script>
-
