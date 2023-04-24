@@ -169,8 +169,11 @@ router.get('/', async (req, res) => {
 // Use withAuth middleware to prevent access to route
 router.get('/profile', async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
+//  Find the logged in user based on the session ID
 
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] }
+    });
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] }
     });
@@ -179,7 +182,7 @@ router.get('/profile', async (req, res) => {
     const accountsData = await Account.findAll({
       where: {
         user_id: req.session.user_id,
-        platform: 'LinkedIn',
+        // platform: 'LinkedIn',
       },
     });
     const accounts = accountsData.map((account) => account.get({ plain: true }));
@@ -190,7 +193,7 @@ router.get('/profile', async (req, res) => {
       li_key:process.env.LI_CLIENT_ID, 
       fb_ci:process.env.FB_CLIENT_ID,
       ...user,
-      accounts,
+      ...accounts,
       logged_in: true
     });
     
@@ -221,12 +224,20 @@ router.get('/profile/linkedin', async (req, res) => {
     });
 
     const user = userData.get({ plain: true });
+ 
+//    const accountsData = await Account.findAll({
+//       where: {
+//         user_id: req.session.user_id,
 
+//       },
+//     });
+  //  const accounts = accountsData.map((account) => account.get({ plain: true }));
     if (!req.query) {
       res.render('profile', { 
           li_key:process.env.LI_CLIENT_ID, 
           fb_ci:process.env.FB_CLIENT_ID,
-          // ...user,
+          ...user,
+ //         ...accounts,
           logged_in: true
         });
     } else {
@@ -235,7 +246,8 @@ router.get('/profile/linkedin', async (req, res) => {
         res.render('profile', { 
           li_key:process.env.LI_CLIENT_ID, 
           fb_ci:process.env.FB_CLIENT_ID,
-          // ...user,
+           ...user,
+//           ...accounts,
           logged_in: true
         });
     }
