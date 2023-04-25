@@ -14,25 +14,55 @@
       src="https://kit.fontawesome.com/f3e5b655dc.js"
       crossorigin="anonymous"
     ></script>
+
 <div>
   <div class="login-bar">
     <div class="logo">
       <img id="logo" src="./assets/Shareitlogo.png" alt="Share.it logo">
     </div>
     <form class="login-form">
+
       <input type="text" id='email-login'class="top-input-box " placeholder="E-mail" />
       <input type="text" id='password-login' class="top-input-box" placeholder="Password" />
       <button class="top-input-box" id="login-btn" type="submit" >Login</button>
+
     </form>
       <div>
-          <a href="#" class="top-input-box" id="sign-up">
+          <a href="#" class="top-input-box" id="sup-link">
             New here? Sign up!
           </a>
-          <a href="#" class="top-input-box" id="sign-up">
+          <a href="#" class="top-input-box" id="forgot">
             Forgot your password?
           </a>
         </div>
   </div>
+</div>
+
+<!--Signup modal-->
+<div class="modal" id="page-modal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <div class="section modal-wrap">
+      <form class="form signup-form">
+        <div class="form-group">
+          <label for="name-signup">name:</label>
+          <input class="form-input" type="text" id="name-signup" />
+        </div>
+        <div class="form-group">
+          <label for="email-signup">email:</label>
+          <input class="form-input" type="text" id="email-signup" />
+        </div>
+        <div class="form-group">
+          <label for="password-signup">password:</label>
+          <input class="form-input" type="password" id="password-signup" />
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary" id="sign-btn" type="submit">signup</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
 </div>
 
 <main>
@@ -72,4 +102,5 @@
   </div>
   
 <script src="./js/login.js"></script>
+<script src="../public/js/index.js"></script>
 
