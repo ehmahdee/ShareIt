@@ -82,7 +82,7 @@
                             </td>
                             <td>
                                 <div>
-                                <button id="postbutton">POST</button>
+                                <button class="post-button" onclick="postLinkedin({{json account}})">POST</button>
                                 </div>
                             </td>
                         </tr>
@@ -121,14 +121,16 @@
         }
         )
 
-    const postLinkedin = async function () {
+    const postLinkedin = async function (account) {
+        console.log(account)
         const formData = new FormData();
-        formData.append('file', 'http://res.cloudinary.com/dov0ohe0b/image/upload/v1682371991/wbcyrzck0a8yrdzewrxv.png');
+        formData.append('file', 'https://cdn.discordapp.com/attachments/1100251493107519510/1100263991097442324/istockphoto-1339226792-612x612.jpg');
         try {
             const response = await fetch('https://cors-anywhere.herokuapp.com/https://api.linkedin.com/v2/assets?action=registerUpload', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer AQUHbr6q9hec4X9n58BQ4gvD_GKq9PCa5P7JP0NeqDSJRl07UZoCz-dBj56MdCIrnWfKEvddGOgqqrBbUo1lJ8X9jquBn9TIBzbYSU0jdZ3NuxYzdOHvai2G4Q2HTYGZshXlEFRvtedk1aP5L0SDdrBVGzuZvxarCLlzDzAjiXmVoBYIaEYf966FhEokgkh2A1Ob9EysaBHygUjx023t6jXozYERWooM4i4Eg9HU-lghV69dNx3KIOYCpINYHrIk8OOMa_ZOG4gOlu7-H3hswWb5t53pwFqpbN5xkmFPiMgsXlQbX0zXl_NWp8aOkWA_wvHGijjBk7gohtTW3HKtzMUcGdEHrQ`,
+                    'Authorization': 'Bearer ' + account.access_token,
+                    'X-Restli-Protocol-Version': '2.0.0'
                 },
                 body: JSON.stringify(
                     {
@@ -136,7 +138,7 @@
                             "recipes": [
                                 "urn:li:digitalmediaRecipe:feedshare-image"
                             ],
-                            "owner": "urn:li:person:IaHbXU7bgj",
+                            "owner": 'urn:li:person:' + account.sm_id,
                             "serviceRelationships": [
                                 {
                                     "relationshipType": "OWNER",
@@ -150,21 +152,58 @@
 
             if (response.ok) {
                 const json = await response.json();
-                console.log(json.value);
+                console.log(json.value.asset);
                 uplaodUrl = json.value.uploadMechanism['com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest']['uploadUrl'];
                 console.log(uplaodUrl);
                 const response2 = await fetch('https://cors-anywhere.herokuapp.com/' + uplaodUrl, {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer AQUHbr6q9hec4X9n58BQ4gvD_GKq9PCa5P7JP0NeqDSJRl07UZoCz-dBj56MdCIrnWfKEvddGOgqqrBbUo1lJ8X9jquBn9TIBzbYSU0jdZ3NuxYzdOHvai2G4Q2HTYGZshXlEFRvtedk1aP5L0SDdrBVGzuZvxarCLlzDzAjiXmVoBYIaEYf966FhEokgkh2A1Ob9EysaBHygUjx023t6jXozYERWooM4i4Eg9HU-lghV69dNx3KIOYCpINYHrIk8OOMa_ZOG4gOlu7-H3hswWb5t53pwFqpbN5xkmFPiMgsXlQbX0zXl_NWp8aOkWA_wvHGijjBk7gohtTW3HKtzMUcGdEHrQ`,
+                        'Authorization': 'Bearer ' + account.access_token,
+                        'X-Restli-Protocol-Version': '2.0.0',
                         'Content-Type': 'application/binary'
                     },
                     body: formData
-                })
+                });
                 console.log(response2)
-                const json2 = await response2.json();
-                console.log(json2)
-                // Use the asset ID to create a new post
+                //const json2 = await response2.json();
+                const response3 = await fetch ('https://cors-anywhere.herokuapp.com/https://api.linkedin.com/v2/ugcPosts', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + account.access_token,
+                        'X-Restli-Protocol-Version': '2.0.0'
+                    },
+                    body: JSON.stringify (
+                        {
+                            "author":  'urn:li:person:' + account.sm_id,
+                            "lifecycleState": "PUBLISHED",
+                            "specificContent": {
+                                "com.linkedin.ugc.ShareContent": {
+                                    "shareCommentary": {
+                                        "text": "Feeling inspired after meeting so many talented individuals at this year's conference. #talentconnect"
+                                    },
+                                    "shareMediaCategory": "IMAGE",
+                                    "media": [
+                                        {
+                                            "status": "READY",
+                                            "description": {
+                                                "text": "Center stage!"
+                                            },
+                                            "media": json.value.asset,
+                                            "title": {
+                                                "text": "LinkedIn Talent Connect 2021"
+                                            },
+                                        }
+                                    ]
+                                }
+                            },
+                            "visibility": {
+                                "com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC"
+                            }
+                        }
+                    )
+                })
+                const data = await response3.json()
+                console.log(data)// Use the asset ID to create a new post
             } else {
                 throw new Error('Failed to register upload');
             }
@@ -172,15 +211,45 @@
             console.error(error);
             // Display an error message or take some other action
         }
-        
     };
 
-
+    const textLinkedin = async function (account) {
+        try {
+            const response3 = await fetch ('https://cors-anywhere.herokuapp.com/https://api.linkedin.com/v2/ugcPosts', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': 'Bearer ' + account.access_token,
+                            'X-Restli-Protocol-Version': '2.0.0',
+                        },
+                        body: JSON.stringify(
+                            {
+                                "author": 'urn:li:person:' + account.sm_id,
+                                "lifecycleState": "PUBLISHED",
+                                "specificContent": {
+                                    "com.linkedin.ugc.ShareContent": {
+                                        "shareCommentary": {
+                                            "text": "this is a testssssss!"
+                                        },
+                                        "shareMediaCategory": "NONE"
+                                    }
+                                },
+                                "visibility": {
+                                    "com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC"
+                                }
+                            }
+                        )
+            })
+        }   catch (error) {
+            console.error(error);
+        }
+    }
 
         document.getElementById("upload_widget").addEventListener("click", function () {
             myWidget.open();
         }, false);
 
-    document.getElementById("postbutton").addEventListener("click", postLinkedin)
+    
+
+
     </script>
 
