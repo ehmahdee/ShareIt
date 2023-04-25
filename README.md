@@ -33,7 +33,9 @@
     This project is licensed under the MIT license.
 
    ## Screenshots
-  
+  ![homepage](https://user-images.githubusercontent.com/126302702/234390584-2f36b98d-829d-4417-97e2-16ed8b09f91b.png)
+  ![homepagewithlogin](https://user-images.githubusercontent.com/126302702/234390599-300fd1f5-ed08-45b8-b0ec-41cc78f2b90f.png)
+
 
   ## Contributions and Credits
 
@@ -45,3 +47,4 @@
 
   ## Deployment
   
+  https://agile-ocean-55089.herokuapp.com/
