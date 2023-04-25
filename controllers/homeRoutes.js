@@ -174,8 +174,26 @@ router.get('/', async (req, res) => {
     res.status(500).json(err);
   }
 });
+router.get('/history', async (req, res) => {
+  try {
+    res.render('history', {
 
+      logged_in: req.session.logged_in 
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+router.get('/contact', async (req, res) => {
+  try {
+    res.render('contact', {
 
+      logged_in: req.session.logged_in 
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 // Profile route
 // TODO: Include Accounts model with User model
