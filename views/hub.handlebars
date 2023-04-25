@@ -54,12 +54,12 @@
         <div class="cloud-container is-flex is-justify-content-center">
             <button id="upload_widget" class="cloudinary-button">Upload files</button>
         <div id="image-container"></div>
-        </div>
-
-
-    <div>
-        <button id="postbutton">POST</button>
     </div>
+
+
+    {{!-- <div>
+        <button id="postbutton">POST</button>
+    </div> --}}
 
 
 
@@ -88,9 +88,7 @@
                                 </span>
                             </td>
                             <td>
-                                <label class="checkbox">
-                                <input type="checkbox">
-                                </label>
+                                <button id="postbutton">POST</button>
                             </td>
                         </tr>
                         {{/each}}
@@ -158,7 +156,7 @@
 
             if (response.ok) {
                 const json = await response.json();
-                console.log(json.value);
+                console.log(json.value.asset);
                 uplaodUrl = json.value.uploadMechanism['com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest']['uploadUrl'];
                 console.log(uplaodUrl);
                 const response2 = await fetch('https://cors-anywhere.herokuapp.com/' + uplaodUrl, {
@@ -170,8 +168,43 @@
                     body: formData
                 })
                 console.log(response2)
-                const json2 = await response2.json();
-                console.log(json2)
+                const response3 = await fetch ('https://cors-anywhere.herokuapp.com/https://api.linkedin.com/v2/ugcPosts', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer AQUHbr6q9hec4X9n58BQ4gvD_GKq9PCa5P7JP0NeqDSJRl07UZoCz-dBj56MdCIrnWfKEvddGOgqqrBbUo1lJ8X9jquBn9TIBzbYSU0jdZ3NuxYzdOHvai2G4Q2HTYGZshXlEFRvtedk1aP5L0SDdrBVGzuZvxarCLlzDzAjiXmVoBYIaEYf966FhEokgkh2A1Ob9EysaBHygUjx023t6jXozYERWooM4i4Eg9HU-lghV69dNx3KIOYCpINYHrIk8OOMa_ZOG4gOlu7-H3hswWb5t53pwFqpbN5xkmFPiMgsXlQbX0zXl_NWp8aOkWA_wvHGijjBk7gohtTW3HKtzMUcGdEHrQ`
+                    },
+                    body: JSON.stringify (
+                        {
+                            "author": "urn:li:person:IaHbXU7bgj",
+                            "lifecycleState": "PUBLISHED",
+                            "specificContent": {
+                                "com.linkedin.ugc.ShareContent": {
+                                    "shareCommentary": {
+                                        "text": "Feeling inspired after meeting so many talented individuals at this year's conference. #talentconnect"
+                                    },
+                                    "shareMediaCategory": "IMAGE",
+                                    "media": [
+                                        {
+                                            "status": "READY",
+                                            "description": {
+                                                "text": "Center stage!"
+                                            },
+                                            "media": ${json.value.asset},
+                                            "title": {
+                                                "text": "LinkedIn Talent Connect 2021"
+
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            "visibility": {
+                                "com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC"
+                            }
+                        }
+                    )
+                    console.log(response3)
+                })
                 // Use the asset ID to create a new post
             } else {
                 throw new Error('Failed to register upload');
