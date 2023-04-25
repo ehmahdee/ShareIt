@@ -83,7 +83,7 @@
         </a>
       </p>
       <p class="control">
-        <a
+        <a 
           href='https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id={{li_key}}&redirect_uri=http://localhost:3001/profile/linkedin&state=foobar&scope=r_liteprofile%20r_emailaddress%20w_member_social'>
           <button class="button is-medium">
             <span class="icon">
@@ -153,7 +153,8 @@
             <tr>
               <td>
                 {{account.secondary_id}}
-                <a href="https://www.{{account.platform}}.com/{{user_id}}/">@{{user_id}}</a>
+                
+                <a href="https://www.{{account.platform}}.com/{{secondary_id}}/">@{{secondary_id}}</a>
               </td>
               <td>
                 <span class="icon">

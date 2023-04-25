@@ -24,13 +24,13 @@ module.exports = {
   },
 
   platform: function(ptype){
-    if(ptype==="instagram"){
+    if(ptype==="Instagram"){
       return "fab fa-instagram"
     }else if (ptype==="facebook"){
       return "fab fa-square-facebook"
     }else if (ptype==="Twitter"){
       return "fab fa-twitter"
-    }else if (ptype==="Linkedin | linkedin"){
+    }else if (ptype==="LinkedIn" | "linkedIn"){
       return "fab fa-linkedin-in"
     }else{
       return "fab fa-pinterest"
