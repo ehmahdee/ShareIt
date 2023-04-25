@@ -140,9 +140,22 @@ function igtoken (short_access_token) {
 // TODO: Send User and Acoount models
 router.get('/hub', async (req, res) => {
   try {
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] }
+    });
+
+    const user = userData.get({ plain: true });
+    const accountsData = await Account.findAll({
+      where: {
+        user_id: req.session.user_id,
+        // platform: 'LinkedIn',
+      },
+    });
+    const accounts = accountsData.map((account) => account.get({ plain: true }));
     
     res.render('hub', {
-
+      ...user,
+      accounts,
       logged_in: req.session.logged_in 
     });
   } catch (err) {
@@ -174,9 +187,6 @@ router.get('/profile', async (req, res) => {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] }
     });
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] }
-    });
 
     const user = userData.get({ plain: true });
     const accountsData = await Account.findAll({
@@ -193,7 +203,7 @@ router.get('/profile', async (req, res) => {
       li_key:process.env.LI_CLIENT_ID, 
       fb_ci:process.env.FB_CLIENT_ID,
       ...user,
-      ...accounts,
+      accounts,
       logged_in: true
     });
     
@@ -218,79 +228,66 @@ router.get('/login', (req, res) => {
 // linkedin redirect
 router.get('/profile/linkedin', async (req, res) => {
   try{
-    // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-    attributes: { exclude: ['password'] }
-    });
+        console.log(req.session);
 
-    const user = userData.get({ plain: true });
- 
-//    const accountsData = await Account.findAll({
-//       where: {
-//         user_id: req.session.user_id,
 
-//       },
-//     });
-  //  const accounts = accountsData.map((account) => account.get({ plain: true }));
+
+
     if (!req.query) {
+          // Find the logged in user based on the session ID
+        const userData = await User.findByPk(req.session.user_id, {
+        attributes: { exclude: ['password'] }
+        });
+
+        const user = userData.get({ plain: true });
+    
+      const accountsData = await Account.findAll({
+          where: {
+            user_id: req.session.user_id,
+
+          },
+        });
+      const accounts = accountsData.map((account) => account.get({ plain: true }));
       res.render('profile', { 
           li_key:process.env.LI_CLIENT_ID, 
           fb_ci:process.env.FB_CLIENT_ID,
           ...user,
- //         ...accounts,
+          accounts,
           logged_in: true
         });
     } else {
         console.log(req.query);
-        litoken(req.query,req.session.user_id);
+        await litoken(req.query,req.session.user_id);
+            // Find the logged in user based on the session ID
+          const userData = await User.findByPk(req.session.user_id, {
+          attributes: { exclude: ['password'] }
+          });
+
+          const user = userData.get({ plain: true });
+      
+          const accountsData = await Account.findAll({
+              where: {
+                user_id: req.session.user_id,
+
+              },
+          });
+        const accounts = accountsData.map((account) => account.get({ plain: true }));
         res.render('profile', { 
           li_key:process.env.LI_CLIENT_ID, 
           fb_ci:process.env.FB_CLIENT_ID,
-           ...user,
-//           ...accounts,
+          ...user,
+          accounts,
           logged_in: true
         });
     }
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
-// ISSUE HERE****
-// instagram redirect
-// router.get('/profile/instagram/?#:key', async (req, res) => {
-//   try {
-//     const key = await req.params.key;
-//     console.log("line232" + key);
-//     // const short_access_token = req.query.access_token;
-//     // if (!short_access_token) {
-//     //   // res.render('error', {
-//     //   //   message: 'Access token not found',
-//     //   //   error: {}
-//     //   // });
-//     //     res.render('profile', { 
-//     //     li_key:process.env.LI_CLIENT_ID, 
-//     //     fb_ci:process.env.FB_CLIENT_ID,
-//     //     // ...user,
-//     //     logged_in: true
-//     //   });
-//     // } else {
-//     //   console.log("line246" + req);
-//     //   await igtoken(short_access_token);
-//     //   res.render('profile', {
-//     //     li_key: process.env.LI_CLIENT_ID,
-//     //     fb_ci: process.env.FB_CLIENT_ID,
-//     //     // ...user,
-//     //     logged_in: true
-//     //   });
-//     // }
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
 
+// Instagram route
 router.post('/profile/instagram/', (req, res) => {
-  
-  // console.log(req.headers.stuff);
   let short_access_token = req.headers.stuff.slice(1, req.headers.stuff.length);
   short_access_token = short_access_token.split('&')
   short_access_token = short_access_token[0].split('=')[1]

@@ -79,11 +79,12 @@
             {{#each accounts as |account|}}
                         <tr>
                             <td>
-                                <a href="https://www.instagram.com/emmaedaily/">@emmaedaily</a>
+                                {{account.secondary_id}}
+                                <a href="https://www.{{account.platform}}.com/{{user_id}}/">@{{user_id}}</a>
                             </td>
                             <td>
                                 <span class="icon">
-                                    <i class="fab fa-instagram"></i>
+                                    <i class="{{platform account.platform}}"></i>
                                 </span>
                             </td>
                             <td>
@@ -132,20 +133,45 @@
         const formData = new FormData();
         formData.append('file', 'http://res.cloudinary.com/dov0ohe0b/image/upload/v1682371991/wbcyrzck0a8yrdzewrxv.png');
         try {
-            const response = await fetch('https://api.linkedin.com/v2/assets?action=registerUpload', {
+            const response = await fetch('https://cors-anywhere.herokuapp.com/https://api.linkedin.com/v2/assets?action=registerUpload', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer AQUQrA7HWMNsuW6dk1iF_eUjoKZS7yn9HTtuPQkycc-NK9JMzsBQu1AOywVPjhYMX9Us43MahF_IPTB1Hx2NAfHE9LZhdOrE2IeqxZey45OxerHVqdbpsP9ZUUosIyk6R3ufJ9WvZX7wSTgNXhZC9Xkpc4U_1ZjzfXN3Biyaszlxkd0-GTlJSMQRy7e6gROaSJ4sXxYNHU40U_t-FQ1faOBdrFrX6ITZg-1Nx7u6LvZYa1WXu_AgQANe8Q_EgxiJJ_bvjjBEybxt3A34MwWeFZ2uckCmt8wLSTFFObrwu8AfxMLAlx6LRpPgxCUpa0Pt45condGTkDsvmtVoSRTq2ORdopuqkA`,
-                    'Content-Type': 'multipart/form-data',
-                    'X-Restli-Protocol-Version': '2.0.0',
-                    'Access-Control-Allow-Origin': 'http://localhost:3001'
+                    'Authorization': `Bearer AQUHbr6q9hec4X9n58BQ4gvD_GKq9PCa5P7JP0NeqDSJRl07UZoCz-dBj56MdCIrnWfKEvddGOgqqrBbUo1lJ8X9jquBn9TIBzbYSU0jdZ3NuxYzdOHvai2G4Q2HTYGZshXlEFRvtedk1aP5L0SDdrBVGzuZvxarCLlzDzAjiXmVoBYIaEYf966FhEokgkh2A1Ob9EysaBHygUjx023t6jXozYERWooM4i4Eg9HU-lghV69dNx3KIOYCpINYHrIk8OOMa_ZOG4gOlu7-H3hswWb5t53pwFqpbN5xkmFPiMgsXlQbX0zXl_NWp8aOkWA_wvHGijjBk7gohtTW3HKtzMUcGdEHrQ`,
                 },
-                body: formData
+                body: JSON.stringify(
+                    {
+                        "registerUploadRequest": {
+                            "recipes": [
+                                "urn:li:digitalmediaRecipe:feedshare-image"
+                            ],
+                            "owner": "urn:li:person:IaHbXU7bgj",
+                            "serviceRelationships": [
+                                {
+                                    "relationshipType": "OWNER",
+                                    "identifier": "urn:li:userGeneratedContent"
+                                }
+                            ]
+                        }
+                    }
+                )
             });
 
             if (response.ok) {
                 const json = await response.json();
-                console.log("Asset ID: " + json.id);
+                console.log(json.value);
+                uplaodUrl = json.value.uploadMechanism['com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest']['uploadUrl'];
+                console.log(uplaodUrl);
+                const response2 = await fetch('https://cors-anywhere.herokuapp.com/' + uplaodUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer AQUHbr6q9hec4X9n58BQ4gvD_GKq9PCa5P7JP0NeqDSJRl07UZoCz-dBj56MdCIrnWfKEvddGOgqqrBbUo1lJ8X9jquBn9TIBzbYSU0jdZ3NuxYzdOHvai2G4Q2HTYGZshXlEFRvtedk1aP5L0SDdrBVGzuZvxarCLlzDzAjiXmVoBYIaEYf966FhEokgkh2A1Ob9EysaBHygUjx023t6jXozYERWooM4i4Eg9HU-lghV69dNx3KIOYCpINYHrIk8OOMa_ZOG4gOlu7-H3hswWb5t53pwFqpbN5xkmFPiMgsXlQbX0zXl_NWp8aOkWA_wvHGijjBk7gohtTW3HKtzMUcGdEHrQ`,
+                        'Content-Type': 'application/binary'
+                    },
+                    body: formData
+                })
+                console.log(response2)
+                const json2 = await response2.json();
+                console.log(json2)
                 // Use the asset ID to create a new post
             } else {
                 throw new Error('Failed to register upload');
@@ -154,6 +180,7 @@
             console.error(error);
             // Display an error message or take some other action
         }
+        
     };
 
 

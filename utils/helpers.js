@@ -30,7 +30,7 @@ module.exports = {
       return "fab fa-square-facebook"
     }else if (ptype==="Twitter"){
       return "fab fa-twitter"
-    }else if (ptype==="linkedin"){
+    }else if (ptype==="Linkedin | linkedin"){
       return "fab fa-linkedin-in"
     }else{
       return "fab fa-pinterest"
