@@ -40,6 +40,7 @@ async function litoken(query,user_id) {
           console.log("access token " + key.access_token);
           const profileData = await fetch('https://api.linkedin.com/v2/me',{headers:{Authorization: `Bearer ${key.access_token}`, method: 'GET'}});
           let data = await profileData.json();
+          
           console.log('linkedIn',data);
 
           // Save the LinkedIn data to an Account model
@@ -50,7 +51,6 @@ async function litoken(query,user_id) {
             secondary_id: data.localizedLastName + ', ' + data.firstName.localized.en_US,
             user_id: user_id
           });
-
 
         } catch (err) {
           console.error(err);
@@ -63,7 +63,7 @@ async function litoken(query,user_id) {
 
 // instagram login functionality
 // TODO: creae Model with information received from Instagram
-function igtoken (short_access_token) {
+function igtoken (short_access_token,user_id) {
   console.log(short_access_token);
 
 
@@ -71,6 +71,7 @@ function igtoken (short_access_token) {
       let longAccess_token;
       let userPageID;
       let pageAccess_token;
+      let instaName;
       const exchangeAccessToken = async () => {
           try {
               const response = await fetch(`https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&client_id=${appId}&client_secret=${appSecret}&fb_exchange_token=${short_access_token}`);
@@ -93,7 +94,7 @@ function igtoken (short_access_token) {
               }
               const json = await response.json();
               console.log(json);
-
+              instaName=json.data[0].name;
               userPageID = json.data[0].id;
               console.log("User Page ID:  " + userPageID);
           } catch (error) {
@@ -125,10 +126,18 @@ function igtoken (short_access_token) {
               console.error(error);
               // Display an error message or take some other action
           }
-      
+          await Account.create({
+            platform: 'Instagram',
+            sm_id: userPageID,
+            access_token: longAccess_token,
+            secondary_id: instaName,
+            user_id: user_id
+          });
+
       };
 
       exchangeAccessToken(); // Call the function to exchange the access token
+
   }
 }
 
@@ -213,10 +222,11 @@ router.get('/profile', async (req, res) => {
         // platform: 'LinkedIn',
       },
     });
+    
     const accounts = accountsData.map((account) => account.get({ plain: true }));
     console.log('user data',user,accounts);
-
-
+ 
+    console.log(req.session)
     res.render('profile', { 
       li_key:process.env.LI_CLIENT_ID, 
       fb_ci:process.env.FB_CLIENT_ID,
@@ -226,6 +236,7 @@ router.get('/profile', async (req, res) => {
     });
     
   } catch (err) {
+
     res.status(500).json(err);
   }
 });
@@ -238,7 +249,7 @@ router.get('/login', (req, res) => {
     return;
   }
 
-  res.render('login', {li_key:process.env.LI_CLIENT_ID, li_cs:process.env.LI_CLIENT_SECRET});
+  res.render('profile', {li_key:process.env.LI_CLIENT_ID, li_cs:process.env.LI_CLIENT_SECRET});
 
 });
 
@@ -246,10 +257,10 @@ router.get('/login', (req, res) => {
 // linkedin redirect
 router.get('/profile/linkedin', async (req, res) => {
   try{
-        console.log(req.session);
-
-
-
+        // req.session.reload(function(err){
+        //   console.log(err);
+        // })
+      
 
     if (!req.query) {
           // Find the logged in user based on the session ID
@@ -267,14 +278,16 @@ router.get('/profile/linkedin', async (req, res) => {
         });
       const accounts = accountsData.map((account) => account.get({ plain: true }));
       res.render('profile', { 
-          li_key:process.env.LI_CLIENT_ID, 
-          fb_ci:process.env.FB_CLIENT_ID,
-          ...user,
-          accounts,
-          logged_in: true
-        });
+        li_key:process.env.LI_CLIENT_ID, 
+        fb_ci:process.env.FB_CLIENT_ID,
+        ...user,
+        accounts,
+        logged_in: true
+      });
+     
+
     } else {
-        console.log(req.query);
+
         await litoken(req.query,req.session.user_id);
             // Find the logged in user based on the session ID
           const userData = await User.findByPk(req.session.user_id, {
@@ -289,17 +302,16 @@ router.get('/profile/linkedin', async (req, res) => {
 
               },
           });
-        const accounts = accountsData.map((account) => account.get({ plain: true }));
-        res.render('profile', { 
-          li_key:process.env.LI_CLIENT_ID, 
-          fb_ci:process.env.FB_CLIENT_ID,
-          ...user,
-          accounts,
-          logged_in: true
-        });
+          const accounts = accountsData.map((account) => account.get({ plain: true }));
+
+          // req.session.save(() => {
+          //   req.session.accounts=accounts;
+          //   res.redirect('/profile');
+          // });
+
     }
   } catch (err) {
-    console.log(err);
+
     res.status(500).json(err);
   }
 });
@@ -309,7 +321,7 @@ router.post('/profile/instagram/', (req, res) => {
   let short_access_token = req.headers.stuff.slice(1, req.headers.stuff.length);
   short_access_token = short_access_token.split('&')
   short_access_token = short_access_token[0].split('=')[1]
-  igtoken(short_access_token);
+  igtoken(short_access_token,req.session.user_id);
 });
 
 module.exports = router;
