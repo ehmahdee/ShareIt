@@ -54,8 +54,10 @@
         <div id="image-container"></div>
         </div>
         <div class="post-caption">
-            <textarea class="textarea" placeholder="Write your post here:" rows="6"></textarea>
+            {{!-- <input id='imagefile' type="file"> --}}
+            <textarea id="inputtext" class="textarea" placeholder="Write your post here:" rows="6"></textarea>
         </div>
+
         <!-- Accounts table -->
         <div class= "tbl-container is-flex is-justify-content-center">
             <div>
@@ -73,7 +75,7 @@
                         <tr>
                             <td>
                                 {{account.secondary_id}}
-                                <a href="https://www.{{account.platform}}.com/{{user_id}}/">@{{user_id}}</a>
+                                <a href="https://www.{{account.platform}}.com/{{account.secondary_id}}/">@{{account.secondary_id}}</a>
                             </td>
                             <td>
                                 <span class="icon">
@@ -82,7 +84,7 @@
                             </td>
                             <td>
                                 <div>
-                                <button class="post-button" onclick="postLinkedin({{json account}})">POST</button>
+                                <button class="post-button" onclick="textLinkedin({{json account}})">POST</button>
                                 </div>
                             </td>
                         </tr>
@@ -123,8 +125,11 @@
 
     const postLinkedin = async function (account) {
         console.log(account)
+        const photo = document.getElementById('imagefile').files[0]
         const formData = new FormData();
-        formData.append('file', 'https://cdn.discordapp.com/attachments/1100251493107519510/1100263991097442324/istockphoto-1339226792-612x612.jpg');
+        console.log(photo)
+        formData.append('file', photo);
+        console.log(formData)
         try {
             const response = await fetch('https://cors-anywhere.herokuapp.com/https://api.linkedin.com/v2/assets?action=registerUpload', {
                 method: 'POST',
@@ -156,7 +161,7 @@
                 uplaodUrl = json.value.uploadMechanism['com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest']['uploadUrl'];
                 console.log(uplaodUrl);
                 const response2 = await fetch('https://cors-anywhere.herokuapp.com/' + uplaodUrl, {
-                    method: 'POST',
+                    method: 'PUT',
                     headers: {
                         'Authorization': 'Bearer ' + account.access_token,
                         'X-Restli-Protocol-Version': '2.0.0',
@@ -214,6 +219,9 @@
     };
 
     const textLinkedin = async function (account) {
+        const textarea = document.getElementById('inputtext')
+        const text = textarea.value
+        console.log(text)
         try {
             const response3 = await fetch ('https://cors-anywhere.herokuapp.com/https://api.linkedin.com/v2/ugcPosts', {
                         method: 'POST',
@@ -228,7 +236,7 @@
                                 "specificContent": {
                                     "com.linkedin.ugc.ShareContent": {
                                         "shareCommentary": {
-                                            "text": "this is a testssssss!"
+                                            "text": text,
                                         },
                                         "shareMediaCategory": "NONE"
                                     }
