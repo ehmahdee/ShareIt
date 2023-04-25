@@ -60,7 +60,22 @@ input[type=text] {
   color: white;
 }
 
+input[type=password] {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 4px solid #947fe8;
+  background-color: #5929c9;
+  color: white;
+}
+
 input[type=text]:focus {
+  background-color: #947fe8;
+}
+
+input[type=password]:focus {
   background-color: #947fe8;
 }
 
