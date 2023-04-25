@@ -54,7 +54,7 @@
         <div id="image-container"></div>
         </div>
         <div class="post-caption">
-            <input id='imagefile' type="file">
+            {{!-- <input id='imagefile' type="file"> --}}
             <textarea id="inputtext" class="textarea" placeholder="Write your post here:" rows="6"></textarea>
         </div>
 
@@ -75,7 +75,7 @@
                         <tr>
                             <td>
                                 {{account.secondary_id}}
-                                <a href="https://www.{{account.platform}}.com/{{user_id}}/">@{{user_id}}</a>
+                                <a href="https://www.{{account.platform}}.com/{{account.secondary_id}}/">@{{account.secondary_id}}</a>
                             </td>
                             <td>
                                 <span class="icon">
