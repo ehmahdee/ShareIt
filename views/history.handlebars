@@ -4,25 +4,25 @@
 <nav class="nav-bar">
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a href="./hub.html" class="nav-link">
+      <a href="/hub" class="nav-link">
         <i class="fa-solid fa-arrow-up-from-bracket" style="color: #fdf4f5;"></i>
         <span class="link-text logo-text">Upload</span>
       </a>
     </li>
     <li class="nav-item">
-      <a href="./profile.html" class="nav-link">
+      <a href="/profile" class="nav-link">
         <i class="fa-regular fa-user" style="color: #fdf4f5;"></i>
         <span class="link-text logo-text">Profile</span>
       </a>
     </li>
     <li class="nav-item">
-      <a href="#" class="nav-link">
+      <a href="/contact" class="nav-link">
         <i class="fa-regular fa-paper-plane" style="color: #fdf4f5;"></i>
         <span class="link-text logo-text">Contact</span>
       </a>
     </li>
     <li class="nav-item">
-      <a href="./index.html" class="nav-link">
+      <a href="/" class="nav-link">
         <i class="fa-solid fa-door-open" style="color: #fdf4f5;"></i>
         <span class="link-text logo-text">Logout</span>
       </a>
@@ -43,18 +43,13 @@
     </div>
     <div class="dropdown-menu" id="dropdown-menu" role="menu">
       <div class="dropdown-content">
-        <a href="#" class="dropdown-item">
-          Account 1
+        {{#if accounts.length}}
+        {{#each accounts as |account|}}
+        <a href="https://www.{{account.platform}}.com/{{user_id}}/" class="dropdown-item">
+          @{{user_id}}
         </a>
-        <a class="dropdown-item">
-          Account 2
-        </a>
-        <a href="#" class="dropdown-item is-active">
-          Account 3
-        </a>
-        <a href="#" class="dropdown-item">
-          Account 4
-        </a>
+        {{/each}}
+        {{/if}}
       </div>
     </div>
   </div>
@@ -71,3 +66,5 @@
   </div>
   {{/each}}
 </div>
+
+<script src="../public/js/history.js"></script>
