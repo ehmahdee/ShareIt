@@ -43,18 +43,13 @@
     </div>
     <div class="dropdown-menu" id="dropdown-menu" role="menu">
       <div class="dropdown-content">
-        <a href="#" class="dropdown-item">
-          Account 1
+        {{#if accounts.length}}
+        {{#each accounts as |account|}}
+        <a href="https://www.{{account.platform}}.com/{{user_id}}/" class="dropdown-item">
+          @{{user_id}}
         </a>
-        <a class="dropdown-item">
-          Account 2
-        </a>
-        <a href="#" class="dropdown-item is-active">
-          Account 3
-        </a>
-        <a href="#" class="dropdown-item">
-          Account 4
-        </a>
+        {{/each}}
+        {{/if}}
       </div>
     </div>
   </div>
@@ -71,3 +66,5 @@
   </div>
   {{/each}}
 </div>
+
+<script src="../public/js/history.js"></script>

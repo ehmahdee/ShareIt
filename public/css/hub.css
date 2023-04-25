@@ -96,11 +96,17 @@ body {
   }
 
   .upload-container {
-    margin-left: 30%;
+    margin-left: 15%;
     position: fixed;
     height: 100vh;
     margin-bottom: 0%;
   }
+
+.post-caption {
+  margin-top: 90%;
+  width: 390px;
+  margin-left: 15%;
+}
 
   .tbl-container {
     margin-top: 90%;
