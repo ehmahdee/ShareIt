@@ -92,7 +92,10 @@ body::-webkit-scrollbar-track {
   padding-top: 50px;
   margin-left: 5rem;
 }
-
+.name-title-container {
+  padding-top: 50px;
+  margin-left: 5rem;
+}
 .level-left {
   background: #F0ECE4;
   height: 200px;
@@ -100,7 +103,13 @@ body::-webkit-scrollbar-track {
   margin: 0;
   border-radius: 5px;
 }
-
+.name-level-left {
+  background: #F0ECE4;
+  height: 100px;
+  width: 100%;
+  margin: 0;
+  border-radius: 5px;
+}
 .level {
   background: #F0ECE4;
   height: 200px;
