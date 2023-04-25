@@ -110,15 +110,20 @@
                 console.log('Done! Here is the image info: ', result.info.url, result);
                 const button = document.getElementById('upload_widget');
                 button.style.display = "none";
-
+            
                 const img = document.createElement('img');
                 img.id = 'postimage';
-                img.src = result.info.url;
+                const transformation = "c_crop,g_faces,h_400,w_400";
+                const originalUrl = result.info.url;
+                const transformedUrl = originalUrl.replace("/upload/", "/upload/" + transformation + "/");
+                img.src = transformedUrl;
+                console.log(img.src)
                 postimage = result.info.url;
 
                 // Append the img element to the image container
                 const imageContainer = document.getElementById('image-container');
                 imageContainer.appendChild(img);
+                
             }
         }
         )
