@@ -85,6 +85,10 @@ cursor: pointer;
   text-align: center;
 }
 
+.register-links {
+  margin-top: 20%;
+}
+
 .login-bar:hover .top-input-box {
   display: block;
 }
