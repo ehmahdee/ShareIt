@@ -96,15 +96,23 @@ body {
   }
 
   .upload-container {
-    margin-left: 5rem;
-    position: relative;
+    margin-left: 15%;
+    position: fixed;
     height: 100vh;
     margin-bottom: 0%;
   }
 
+.post-caption {
+  margin-top: 90%;
+  width: 390px;
+  margin-left: 15%;
+}
+
   .tbl-container {
-    margin-top: 40%;
-    margin-left: 30%;
+    margin-top: 90%;
+    margin-left: 8%;
+    position: relative;
+    
   }
   
   .table {
@@ -129,14 +137,20 @@ body {
   }
 
   #upload_widget {
-   background: #d0cdde;
+  background: #d0cdde;
   height: 400px;
   width: 400px;
-  position: absolute;
+  position: fixed;
   top: 20%;
   margin: -50px 0 0 -50px;
   border-radius: 5px;
   border: 0.5rem solid #5929c9;
+  }
+
+  #postbutton {
+    margin-top: 20%;
+    position: relative
+
   }
 
   @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";

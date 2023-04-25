@@ -24,13 +24,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="./history.html" class="nav-link">
+                <a href="/history" class="nav-link">
                     <i class="fa-solid fa-clock-rotate-left" style="color: #fdf4f5;"></i>
                     <span class="link-text logo-text">History</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/contact" class="nav-link">
                     <i class="fa-regular fa-paper-plane" style="color: #fdf4f5;"></i>
                     <span class="link-text logo-text">Contact</span>
                 </a>
@@ -47,24 +47,14 @@
     </nav>
 
 
-    <!--div to hold graphic elements-->
-
     <!--div to contain upload capabilities-->
-    <div class="upload-container is-flex is-justify-content-center">
+    <div class="upload-container">
         <div class="cloud-container is-flex is-justify-content-center">
             <button id="upload_widget" class="cloudinary-button">Upload files</button>
         <div id="image-container"></div>
-    </div>
-
-
-    {{!-- <div>
-        <button id="postbutton">POST</button>
-    </div> --}}
-
-
-
+        </div>
         <!-- Accounts table -->
-        <div class= "tbl-container">
+        <div class= "tbl-container is-flex is-justify-content-center">
             <div>
                 <table class="table is-bordered is-hoverable">
                     <thead>
@@ -76,7 +66,7 @@
                     </thead>
                     <tbody>
                         {{#if accounts.length}}
-            {{#each accounts as |account|}}
+                        {{#each accounts as |account|}}
                         <tr>
                             <td>
                                 {{account.secondary_id}}
@@ -88,11 +78,13 @@
                                 </span>
                             </td>
                             <td>
-                                <button id="postbutton">POST</button>
+                                <div>
+                                <button class="post-button" onclick="postLinkedin({{account}})">POST</button>
+                                </div>
                             </td>
                         </tr>
                         {{/each}}
-            {{/if}}
+                        {{/if}}
                     </tbody>
                 </table>
             </div>
@@ -127,7 +119,8 @@
         }
         )
 
-    const postLinkedin = async function () {
+    const postLinkedin = async function (account) {
+        console.log(account)
         const formData = new FormData();
         formData.append('file', 'http://res.cloudinary.com/dov0ohe0b/image/upload/v1682371991/wbcyrzck0a8yrdzewrxv.png');
         try {
@@ -213,7 +206,6 @@
             console.error(error);
             // Display an error message or take some other action
         }
-        
     };
 
 
@@ -222,6 +214,19 @@
             myWidget.open();
         }, false);
 
-    document.getElementById("postbutton").addEventListener("click", postLinkedin)
+    
+    document.querySelectorAll('.post-button').forEach(button => {
+        button.addEventListener('click', event => {
+            const row = event.target.parentElement.parentElement.parentElement;
+            const platform = row.querySelector('.icon i').classList[1];
+            const account = {
+                secondary_id: row.querySelector('a').textContent.replace('@', ''),
+                platform: platform
+            };
+            postLinkedin(account);
+        });
+    });
+
+
     </script>
 
