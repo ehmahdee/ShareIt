@@ -47,24 +47,14 @@
     </nav>
 
 
-    <!--div to hold graphic elements-->
-
     <!--div to contain upload capabilities-->
-    <div class="upload-container is-flex is-justify-content-center">
+    <div class="upload-container">
         <div class="cloud-container is-flex is-justify-content-center">
             <button id="upload_widget" class="cloudinary-button">Upload files</button>
         <div id="image-container"></div>
         </div>
-
-
-    <div>
-        <button id="postbutton">POST</button>
-    </div>
-
-
-
         <!-- Accounts table -->
-        <div class= "tbl-container">
+        <div class= "tbl-container is-flex is-justify-content-center">
             <div>
                 <table class="table is-bordered is-hoverable">
                     <thead>
@@ -76,7 +66,7 @@
                     </thead>
                     <tbody>
                         {{#if accounts.length}}
-            {{#each accounts as |account|}}
+                        {{#each accounts as |account|}}
                         <tr>
                             <td>
                                 {{account.secondary_id}}
@@ -88,13 +78,13 @@
                                 </span>
                             </td>
                             <td>
-                                <label class="checkbox">
-                                <input type="checkbox">
-                                </label>
+                                <div>
+                                <button id="postbutton">POST</button>
+                                </div>
                             </td>
                         </tr>
                         {{/each}}
-            {{/if}}
+                        {{/if}}
                     </tbody>
                 </table>
             </div>
