@@ -39,11 +39,11 @@
 
   ## Contributions and Credits
 
-    Josh Dadbin:
+    Josh Dadbin: API and Backend (SQL, Handlebars, Node, Javascript)
 
-    Connor Mateo:
+    Connor Mateo: Data and Backend (SQL, Handlebars, Node, Javascript)
 
-    Emma Daily:
+    Emma Daily: Design and Frontend (HTML, CSS, Javascript, Handlebars)
 
   ## Deployment
   
