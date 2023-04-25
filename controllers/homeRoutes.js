@@ -63,7 +63,7 @@ async function litoken(query,user_id) {
 
 // instagram login functionality
 // TODO: creae Model with information received from Instagram
-function igtoken (short_access_token,user_id) {
+async function igtoken (short_access_token,user_id,res,req) {
   console.log(short_access_token);
 
 
@@ -122,6 +122,7 @@ function igtoken (short_access_token,user_id) {
               // }
               const json = await response.json();
               console.log("IG ID:  " + json);
+
           } catch (error) {
               console.error(error);
               // Display an error message or take some other action
@@ -133,11 +134,10 @@ function igtoken (short_access_token,user_id) {
             secondary_id: instaName,
             user_id: user_id
           });
-
       };
 
       exchangeAccessToken(); // Call the function to exchange the access token
-
+      
   }
 }
 
@@ -304,10 +304,10 @@ router.get('/profile/linkedin', async (req, res) => {
           });
           const accounts = accountsData.map((account) => account.get({ plain: true }));
 
-          // req.session.save(() => {
-          //   req.session.accounts=accounts;
-          //   res.redirect('/profile');
-          // });
+          req.session.save(() => {
+            req.session.accounts=accounts;
+            res.redirect('/profile');
+          });
 
     }
   } catch (err) {
@@ -317,11 +317,13 @@ router.get('/profile/linkedin', async (req, res) => {
 });
 
 // Instagram route
-router.post('/profile/instagram/', (req, res) => {
+router.post('/profile/instagram/', async (req, res) => {
   let short_access_token = req.headers.stuff.slice(1, req.headers.stuff.length);
   short_access_token = short_access_token.split('&')
   short_access_token = short_access_token[0].split('=')[1]
-  igtoken(short_access_token,req.session.user_id);
+  igtoken(short_access_token,req.session.user_id,res,req);
+
 });
+
 
 module.exports = router;
