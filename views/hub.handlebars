@@ -82,7 +82,7 @@
                             </td>
                             <td>
                                 <div>
-                                <button class="post-button" onclick="postLinkedin({{account}})">POST</button>
+                                <button class="post-button" onclick="postLinkedin({{json account}})">POST</button>
                                 </div>
                             </td>
                         </tr>
@@ -129,7 +129,7 @@
             const response = await fetch('https://cors-anywhere.herokuapp.com/https://api.linkedin.com/v2/assets?action=registerUpload', {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer AQUHbr6q9hec4X9n58BQ4gvD_GKq9PCa5P7JP0NeqDSJRl07UZoCz-dBj56MdCIrnWfKEvddGOgqqrBbUo1lJ8X9jquBn9TIBzbYSU0jdZ3NuxYzdOHvai2G4Q2HTYGZshXlEFRvtedk1aP5L0SDdrBVGzuZvxarCLlzDzAjiXmVoBYIaEYf966FhEokgkh2A1Ob9EysaBHygUjx023t6jXozYERWooM4i4Eg9HU-lghV69dNx3KIOYCpINYHrIk8OOMa_ZOG4gOlu7-H3hswWb5t53pwFqpbN5xkmFPiMgsXlQbX0zXl_NWp8aOkWA_wvHGijjBk7gohtTW3HKtzMUcGdEHrQ`,
+                    'Authorization': `Bearer ${account.accessToken}`,
                 },
                 body: JSON.stringify(
                     {
@@ -137,7 +137,7 @@
                             "recipes": [
                                 "urn:li:digitalmediaRecipe:feedshare-image"
                             ],
-                            "owner": "urn:li:person:IaHbXU7bgj",
+                            "owner": `urn:li:person:${account.id}`,
                             "serviceRelationships": [
                                 {
                                     "relationshipType": "OWNER",
@@ -157,20 +157,21 @@
                 const response2 = await fetch('https://cors-anywhere.herokuapp.com/' + uplaodUrl, {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer AQUHbr6q9hec4X9n58BQ4gvD_GKq9PCa5P7JP0NeqDSJRl07UZoCz-dBj56MdCIrnWfKEvddGOgqqrBbUo1lJ8X9jquBn9TIBzbYSU0jdZ3NuxYzdOHvai2G4Q2HTYGZshXlEFRvtedk1aP5L0SDdrBVGzuZvxarCLlzDzAjiXmVoBYIaEYf966FhEokgkh2A1Ob9EysaBHygUjx023t6jXozYERWooM4i4Eg9HU-lghV69dNx3KIOYCpINYHrIk8OOMa_ZOG4gOlu7-H3hswWb5t53pwFqpbN5xkmFPiMgsXlQbX0zXl_NWp8aOkWA_wvHGijjBk7gohtTW3HKtzMUcGdEHrQ`,
+                        'Authorization': `Bearer ${account.accessToken}`,
                         'Content-Type': 'application/binary'
                     },
                     body: formData
-                })
+                });
                 console.log(response2)
+                const json2 = await response2.json();
                 const response3 = await fetch ('https://cors-anywhere.herokuapp.com/https://api.linkedin.com/v2/ugcPosts', {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer AQUHbr6q9hec4X9n58BQ4gvD_GKq9PCa5P7JP0NeqDSJRl07UZoCz-dBj56MdCIrnWfKEvddGOgqqrBbUo1lJ8X9jquBn9TIBzbYSU0jdZ3NuxYzdOHvai2G4Q2HTYGZshXlEFRvtedk1aP5L0SDdrBVGzuZvxarCLlzDzAjiXmVoBYIaEYf966FhEokgkh2A1Ob9EysaBHygUjx023t6jXozYERWooM4i4Eg9HU-lghV69dNx3KIOYCpINYHrIk8OOMa_ZOG4gOlu7-H3hswWb5t53pwFqpbN5xkmFPiMgsXlQbX0zXl_NWp8aOkWA_wvHGijjBk7gohtTW3HKtzMUcGdEHrQ`
+                        'Authorization': `Bearer ${account.accessToken}`
                     },
                     body: JSON.stringify (
                         {
-                            "author": "urn:li:person:IaHbXU7bgj",
+                            "author": `urn:li:person:${account.id}`,
                             "lifecycleState": "PUBLISHED",
                             "specificContent": {
                                 "com.linkedin.ugc.ShareContent": {
@@ -184,11 +185,10 @@
                                             "description": {
                                                 "text": "Center stage!"
                                             },
-                                            "media": ${json.value.asset},
+                                            "media": json2.value.asset,
                                             "title": {
                                                 "text": "LinkedIn Talent Connect 2021"
-
-                                            }
+                                            },
                                         }
                                     ]
                                 }
@@ -198,9 +198,9 @@
                             }
                         }
                     )
-                    console.log(response3)
+                
                 })
-                // Use the asset ID to create a new post
+                console.log(response3)// Use the asset ID to create a new post
             } else {
                 throw new Error('Failed to register upload');
             }
@@ -217,17 +217,6 @@
         }, false);
 
     
-    document.querySelectorAll('.post-button').forEach(button => {
-        button.addEventListener('click', event => {
-            const row = event.target.parentElement.parentElement.parentElement;
-            const platform = row.querySelector('.icon i').classList[1];
-            const account = {
-                secondary_id: row.querySelector('a').textContent.replace('@', ''),
-                platform: platform
-            };
-            postLinkedin(account);
-        });
-    });
 
 
     </script>
